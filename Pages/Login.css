@@ -13,7 +13,6 @@ body {
 }
 
 .home{
-<!-- background-color:;  -->
     width: 100px;
     height: 100px;
 }
@@ -37,7 +36,6 @@ body {
 }
 
 .container {
-    background-color: ;
     display: flex;
     flex-direction: column;
     justify-content: center;
