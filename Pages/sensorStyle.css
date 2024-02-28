@@ -1,0 +1,47 @@
+body {
+    background-color: #1b1f24; 
+    font-family: 'Nova Square', sans-serif; 
+    color: white; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.header {
+    display: flex;
+    align-items: center;
+    background-color: cornflowerblue;
+    width: 100%;
+    height: 100px;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a4282; 
+    padding: 20px;
+    min-height: 100vh; 
+}
+
+#messages {
+    background-color: #223045; 
+    border-radius: 8px; 
+    padding: 20px; 
+    width: 80%; 
+    max-width: 600px; 
+    margin: 20px auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    overflow-y: auto; 
+}
+
+p {
+    background-color: #2b3a52; 
+    color: white; 
+    border: 1px solid #2b3a52; 
+    border-radius: 4px; 
+    padding: 10px; 
+    margin-bottom: 10px; 
+    word-wrap: break-word;
+}
