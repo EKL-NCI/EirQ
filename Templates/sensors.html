@@ -5,14 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EirQ Solutions</title>
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.11.min.js"></script>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/sensorStyle.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
 </head>
 <body>
-    <h1>Air Quality Test - Input from Sensor</h1>
-    <div id="messages">
-        {% for msg in data %}
-            <p>Timestamp: {{ msg.timestamp }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>
-        {% endfor %}
+    <div class="main_header">
+        <div class="sensor_home">
+            <a class="sensor_homeBut" href="/"><img class="sensor_homeImg" src="{{url_for('static', filename='img/home.png')}}" alt="home"></a>
+        </div>
+        <div class="main_logo">
+            <img src="{{url_for('static', filename='img/logo.png')}}" alt="EirQ Solutions Logo" class="main_logoImg">
+        </div>
+        <div class="main_menu">
+            <!-- Include navigation items here -->
+            <img class="main_menuImg" src="{{url_for('static', filename='img/menu.png')}}" alt="menu">
+            <div class="main_menuOptions">
+                <a href="/Login">Login</a>
+                <a href="/Signup">Sign Up</a>
+                <a href="/Sensors">View Sensors</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="main_main">
+        <div class="sensor_main">
+            <h1>Air Quality Test - Input from Sensor</h1>
+            <div id="messages" class="main_container">
+                <!-- Sensor data will be populated here -->
+                {% for msg in data %}
+                    <p>Timestamp: {{ msg.timestamp }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </body>
 </html>
