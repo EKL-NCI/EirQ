@@ -7,19 +7,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nova+Square&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Styles.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
 </head>
 <body>
 <div class="login_header">
     <div class="login_menu">
         <div class="login_home">
-            <a class="login_homeBut" href="Index.html"><img class="login_homeImg" src="img/home.png" alt="home"></a>
+            <a class="login_homeBut" href="/"><img class="login_homeImg" src="{{url_for('static', filename='img/home.png')}}v" alt="home"></a>
         </div>
     </div>
 </div>
 <div class="login_main">
     <div class="login_container">
-        <img class="login_logo" src="img/logo.png" alt="logo">
+        <img class="login_logo" src="{{url_for('static', filename='img/logo.png')}}" alt="logo">
         <div class="login_login-container">
 
             <form class="login_login-form">

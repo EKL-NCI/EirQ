@@ -7,19 +7,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nova+Square&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Styles.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
 </head>
 <body>
 <div class="signup_header">
     <div class="signup_menu">
         <div class="signup_home">
-            <a class="signup_homeBut" href="Index.html"><img class="signup_homeImg" src="img/home.png" alt="home"></a>
+            <a class="signup_homeBut" href="/"><img class="signup_homeImg" src="{{url_for('static', filename='img/home.png')}}" alt="home"></a>
         </div>
     </div>
 </div>
 <div class="signup_main">
     <div class="signup_container">
-        <img class="signup_logo" src="img/logo.png" alt="logo">
+        <img class="signup_logo" src="{{url_for('static', filename='img/logo.png')}}" alt="logo">
         <div class="signup_signup-container">
 
             <form class="signup_signup-form">

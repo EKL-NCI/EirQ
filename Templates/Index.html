@@ -12,21 +12,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nova+Square&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="Styles.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
 </head>
 <body>
 
 <!-- Navigation -->
 <div class="main_header">
     <div class="main_menu">
-        <img class="main_menuImg" src="img/menu.png" alt="menu" >
+        <img class="main_menuImg" src="{{url_for('static', filename='img/menu.png')}}" alt="menu" >
         <div class="main_menuOptions">
-            <a href="Login.html">Login</a>
-            <a href="Signup.html">Sign Up</a>
-            <a href="sensors.html">View Sensors</a>
+            <a href=/Login>Login</a>
+            <a href=/Signup>Sign Up</a>
+            <a href=/Sensors>View Sensors</a>
         </div>
     </div>
-    <div class="main_logo"><img class="main_logoImg" src="img/logo.png" alt="logo" ></div>
+    <div class="main_logo"><img class="main_logoImg" src="{{url_for('static', filename='img/logo.png')}}" alt="logo" ></div>
 </div>
 
 <div class="main_main">

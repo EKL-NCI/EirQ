@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EirQ Solutions</title>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.11.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/sensorStyle.css')}}">
+</head>
+<body>
+    <h1>Air Quality Test - Input from Sensor</h1>
+    <div id="messages">
+        {% for msg in data %}
+            <p>Timestamp: {{ msg.timestamp }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
