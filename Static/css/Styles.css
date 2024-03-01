@@ -93,13 +93,13 @@ body {
 }
 
 .info_paragraph {
-    text-align: center; /* Center the text */
-    color: white; /* If your text is light colored */
-    padding: 20px; /* Add some padding */
-    background-color: #2b3a52; /* Or any other color that fits your design */
+    text-align: center; 
+    color: white; 
+    padding: 20px; 
+    background-color: #2b3a52; 
     margin: 40px 0; /* Add some top and bottom margin */
-    border-radius: 8px; /* Optional: if you want rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: if you want some shadow for depth */
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
 }
 
 /*Signup*/
@@ -284,34 +284,34 @@ button {
 }
 
 .sensor_main {
-    width: 80%; /* Adjust the width as needed */
-    max-width: 600px; /* Or whatever maximum width you prefer */
+    width: 80%; 
+    max-width: 600px; 
     margin-top: 120px; /* Push down from fixed header */
     padding: 20px;
     box-sizing: border-box;
-    background-color: #223045; /* Dark blue background for contrast */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    background-color: #223045; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* shadow for depth */
 }
 
 #messages {
-    background-color: white; /* For readability */
+    background-color: white; 
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 80%;
-    max-width: 600px; /* Consistency in width with other pages */
-    margin: 20px 0; /* Spacing from the header */
-    text-align: center; /* Center-align the text */
+    max-width: 600px; 
+    margin: 20px 0; 
+    text-align: center; 
 }
 
 #messages p {
     background-color: #2b3a52; /* Slightly lighter blue for paragraph */
-    color: #ffffff; /* White text for readability */
+    color: #ffffff; 
     padding: 10px; /* Padding inside paragraphs */
     margin: 10px 0; /* Margin between paragraphs */
-    border-radius: 4px; /* Rounded corners for paragraphs */
-    font-size: 0.9rem; /* Adjust the font size as needed */
+    border-radius: 4px; 
+    font-size: 0.9rem; 
     line-height: 1.4; /* Line height for better readability */
     word-wrap: break-word; /* Ensure long text wraps */
 }
@@ -339,5 +339,5 @@ button {
     color: #ffffff;
     text-align: center;
     padding-top: 20px; /* Additional padding to push it below the fixed header */
-    margin-bottom: 20px; /* Space below the header text */
+    margin-bottom: 20px; 
 }
