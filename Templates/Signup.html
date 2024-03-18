@@ -22,18 +22,19 @@
         <img class="signup_logo" src="{{url_for('static', filename='img/logo.png')}}" alt="logo">
         <div class="signup_signup-container">
 
-            <form class="signup_signup-form">
+            <form class="signup_signup-form" action="/Signup" method="post">
                 <label for="business-name">Business Name:</label>
                 <input type="text" id="business-name" name="business-name" required>
-
+            
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
-
+            
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Signup</button>
             </form>
         </div>
-        <button type="submit">Signup</button>
     </div>
 </div>
 </body>
