@@ -4,10 +4,11 @@ from pubnub.pubnub import PubNub
 from pubnub.callbacks import SubscribeCallback
 import firebase_admin
 from firebase_admin import credentials, db
-from flask_mysqldb import MySQL  
 import bcrypt
 
-# Firebase info will go here !
+app = Flask(__name__)
+
+# Firebase configuration
 cred = credentials.Certificate("EirQ/credentials.json")
 try:
     firebase_admin.initialize_app(cred, name="sensors", options={'databaseURL': 'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
@@ -22,14 +23,6 @@ pnconfig.subscribe_key = 'sub-c-6afc2464-b330-469f-a68d-52cbba8aecc4'
 pnconfig.uuid = 'flask_demo_server'
 pubnub = PubNub(pnconfig)
 messages = []
-
-#MySQL Configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQ:L_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'eirq'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-mysql = MySQL(app)
 
 class MySubscribeCallback(SubscribeCallback):
     def message(self, pubnub, message):
@@ -57,21 +50,22 @@ def sensors():
 @app.route('/Login', methods=['GET', 'POST'])
 def Login():
 
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form.get('password').encode('utf-8')
+    #  if request.method == 'POST':
+    #     email = request.form['email']
+    #     password = request.form.get('password').encode('utf-8')
 
-        cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM users WHERE email = %s', [email])
-        user = cursor.fetchone()
-        cursor.close()
+    #     cursor = mysql.connection.cursor()
+    #     cursor.execute('SELECT * FROM users WHERE email = %s', [email])
+    #     user = cursor.fetchone()
+    #     cursor.close()
 
-        if user and bcrypt.checkpw(password, user['password'].encode('utf-8')):
-            flash('You have been logged in!', 'success')
-            return redirect(url_for('index'))
-        else:
-            flash('Invalid login credentials. Please try again.', 'error')
-            pass
+    #     if user and bcrypt.checkpw(password, user['password'].encode('utf-8')):
+    #         flash('You have been logged in!', 'success')
+    #         return redirect(url_for('index'))
+    #     else:
+    #         flash('Invalid login credentials. Please try again.', 'error')
+    #         pass
+   
 
     return render_template('Login.html')
 
@@ -85,10 +79,10 @@ def sign_up():
         # Hashing the password
         hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
 
-        cursor = mysql.connection.cursor()
-        cursor.execute('INSERT INTO users (username, email, password) VALUES (%s, %s, %s)', (business_name, email, hashed_password.decode('utf-8')))
-        mysql.connection.commit()
-        cursor.close()
+       # cursor = mysql.connection.cursor()
+       # cursor.execute('INSERT INTO users (username, email, password) VALUES (%s, %s, %s)', (business_name, email, hashed_password.decode('utf-8')))
+       # mysql.connection.commit()
+       # cursor.close()
 
         return redirect(url_for('Login'))
 
