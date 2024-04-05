@@ -28,9 +28,9 @@
     </div>
 
     <div class="main_main">
-        <div class="sensor_main">
-            <h1>Air Quality Test - Input from Sensor</h1>
-            <div id="messages" class="main_container">
+        <div class="sensor_main">s
+            <h1>Air Quality - Live </h1>
+            <div id="messages" class="main_container" style="text-align: center;">
                 <!-- Sensor data will be populated here -->
                 {% for msg in data %}
                     <p>Timestamp: {{ msg.timestamp }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>

@@ -1,6 +1,6 @@
 /*Main*/
 body {
-    background-color: #1b1f24;
+    background-color: #35daff;
     font-family: 'Nova Square', sans-serif;
 }
 
@@ -10,7 +10,7 @@ body {
     position: fixed;
     top: 0;
     z-index: 1000;
-    background-color: cornflowerblue;
+    background-color:black;
     width: 100%;
     height: 100px;
 }
@@ -18,18 +18,20 @@ body {
 .main_logoImg{
     width: 100px;
     height: 100px;
+    position: center;
 }
 
 .main_logo {
-    background-color: #223045;
+    background-color: black;
     width: 100px;
     height: 100px;
     margin: auto;
+    position: center;
 }
 
 .main_menu {
     position: relative;
-    background-color: #223045;
+    background-color: #35daff;
     width: 100px;
     height: 100px;
     display: flex;
@@ -38,9 +40,10 @@ body {
 }
 
 .main_menuImg {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     cursor: pointer;
+    position: center;
 }
 
 .main_menuOptions {
@@ -49,7 +52,7 @@ body {
     top: 100%;
     left: 0;
     width: 120px;
-    background-color: #223045;
+    background-color: black;
     padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
@@ -67,7 +70,7 @@ body {
 }
 
 .main_menuOptions a:hover {
-    background-color: #1a4282;
+    background-color: black;
 }
 
 .main_main {
@@ -77,7 +80,7 @@ body {
     align-items: center; /* Center content horizontally */
     min-height: calc(100vh - 100px); /* Subtract the header height */
     padding: 20px 0;
-    background-color: #1a4282;
+    background-color: black;
 }
 
 .main_container {
@@ -96,7 +99,7 @@ body {
     text-align: center; 
     color: white; 
     padding: 20px; 
-    background-color: #2b3a52; 
+    background-color: black; 
     margin: 40px 0; /* Add some top and bottom margin */
     border-radius: 8px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
@@ -107,7 +110,7 @@ body {
     display: flex;
     align-items: center;
     position: relative;
-    background-color: cornflowerblue;
+    background-color: rgb(0, 0, 0);
     width: 100%;
     height: 100px;
 }
@@ -134,7 +137,7 @@ body {
     flex-direction: column;
     width: 100%;
     height: 800px;
-    background-color: #1a4282;
+    background-color: black;
 }
 
 .signup_container {
@@ -180,7 +183,7 @@ input {
 
 button {
     padding: 12px;
-    background-color: cornflowerblue;
+    background-color: black;
     color: white;
     border: none;
     cursor: pointer;
@@ -194,7 +197,7 @@ button {
     display: flex;
     align-items: center;
     position: relative;
-    background-color: cornflowerblue;
+    background-color: black;
     width: 100%;
     height: 100px;
 }
@@ -219,7 +222,7 @@ button {
     flex-direction: column;
     width: 100%;
     height: 800px;
-    background-color: #1a4282;
+    background-color: black;
 }
 
 .login_container {
@@ -265,7 +268,7 @@ input {
 
 button {
     padding: 12px;
-    background-color: cornflowerblue;
+    background-color: black;
     color: white;
     border: none;
     cursor: pointer;
@@ -278,7 +281,7 @@ button {
     display: flex;
     align-items: center;
     position: relative;
-    background-color: cornflowerblue;
+    background-color: black;
     width: 100%;
     height: 100px;
 }
@@ -289,7 +292,7 @@ button {
     margin-top: 120px; /* Push down from fixed header */
     padding: 20px;
     box-sizing: border-box;
-    background-color: #223045; 
+    background-color: #35daff; 
     border-radius: 10px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* shadow for depth */
 }

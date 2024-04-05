@@ -1,17 +1,18 @@
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import Flask, session, render_template, request,redirect, url_for
 from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
 from pubnub.callbacks import SubscribeCallback
 import firebase_admin
-from firebase_admin import credentials, db
-import bcrypt
+from firebase_admin import credentials, db, auth ,firestore
+import pyrebase
+from collections.abc import MutableMapping
 
 app = Flask(__name__)
 
-# Firebase configuration
-cred = credentials.Certificate("EirQ/credentials.json")
+# Firebase service account cred!
+cred = credentials.Certificate("credentials.json")
 try:
-    firebase_admin.initialize_app(cred, name="sensors", options={'databaseURL': 'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
+    firebase_admin.initialize_app(cred, name="sensor", options={'databaseURL': 'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
 except ValueError as e:
     print("Error initializing Firebase:", e)
 # Secret key for the app
@@ -24,6 +25,25 @@ pnconfig.uuid = 'flask_demo_server'
 pubnub = PubNub(pnconfig)
 messages = []
 
+db = firestore.client(app=firebase_admin.get_app("sensor"))
+
+# Firebase Confifuration
+firebase_config = {   
+
+            'apiKey': "AIzaSyCVDRhmU_ps8O0GNI9FjqmR6oh67ariS3s",
+            'authDomain': "eirq-solutions.firebaseapp.com",
+            'databaseURL': "https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app",
+            'projectId': "eirq-solutions",
+            'storageBucket': "eirq-solutions.appspot.com",
+            'messagingSenderId': "931290153741",
+            'appId': "1:931290153741:web:d8edcb6428ff83a5352644",
+            'measurementId': "G-KRKNJRRQMY"
+}
+
+firebase = pyrebase.initialize_app(firebase_config)
+auth = firebase.auth()
+
+    
 class MySubscribeCallback(SubscribeCallback):
     def message(self, pubnub, message):
         # Append received message to the messages list
@@ -38,56 +58,85 @@ def subscribe_to_channel():
     pubnub.subscribe().channels('aq_channel').execute()
 
 # Routing to pages
-
 @app.route('/')
 def index():
     return render_template('Index.html')  # This will render the HTML file with the PubNub subscription.
 
-@app.route('/Sensors')
-def sensors():
-    return render_template('sensors.html', data=messages)
-
 @app.route('/Login', methods=['GET', 'POST'])
-def Login():
-
-    #  if request.method == 'POST':
-    #     email = request.form['email']
-    #     password = request.form.get('password').encode('utf-8')
-
-    #     cursor = mysql.connection.cursor()
-    #     cursor.execute('SELECT * FROM users WHERE email = %s', [email])
-    #     user = cursor.fetchone()
-    #     cursor.close()
-
-    #     if user and bcrypt.checkpw(password, user['password'].encode('utf-8')):
-    #         flash('You have been logged in!', 'success')
-    #         return redirect(url_for('index'))
-    #     else:
-    #         flash('Invalid login credentials. Please try again.', 'error')
-    #         pass
-   
-
+def login():
+    if session.get('user'):
+        return 'Welcome {}'.format(session['user'])
+    
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        try:
+            user = auth.sign_in_with_email_and_password(email, password)
+            session['user'] = email
+            # Redirect to the sensors page upon successful login
+            return redirect(url_for('sensors'))
+        except Exception as e:
+            print("Login failed for user:", email, "with error:", str(e))  # Log failed login attempt
+            return render_template('Login.html', error_message="Failed Login")
+    
     return render_template('Login.html')
 
+
+
 @app.route('/Signup', methods=['GET', 'POST'])
-def sign_up():
+def signup():
     if request.method == 'POST':
-        business_name = request.form.get('business-name')
-        email = request.form.get('email')
-        password = request.form.get('password').encode('utf-8')
+        pwd0 = request.form['user_pwd0']
+        pwd1 = request.form['user_pwd1']
+        
+        if pwd0 != pwd1:
+            return render_template('Signup.html', error_message="Invalid Email or Passwords do not match")
+        
+        businessName = request.form['business-name']
+        email = request.form['email']
+        name = request.form['name']
+        password = request.form['user_pwd1']
 
-        # Hashing the password
-        hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
+        try:
+            user = auth.create_user_with_email_and_password(email, password)
+            auth.send_email_verification(user['idToken'])
 
-       # cursor = mysql.connection.cursor()
-       # cursor.execute('INSERT INTO users (username, email, password) VALUES (%s, %s, %s)', (business_name, email, hashed_password.decode('utf-8')))
-       # mysql.connection.commit()
-       # cursor.close()
+            users = {
+            
+                'name': name,
+                'business-name': businessName,
+                'email': email,
+                'user_pwd1': password
+            }  
+            
+            db.collection('User_data').add(users)
 
-        return redirect(url_for('Login'))
+            return render_template('Verify_email.html', email=email)
+        
+        except Exception as e:
+            print("Error:", str(e))  # Print the error message for debugging
+            return "Cannot be verified due to an error: {}".format(str(e))
+    
+    return render_template('Signup.html', message="SignUp successful!")
 
-    return render_template('Signup.html')
+
+@app.route('/Sensors')
+def sensors():
+    return render_template('Sensors.html', data=messages)
+
+
+@app.route('/Verify')
+def verify_email():
+    return render_template('Verify_email.html')
+
+
+@app.route('/Logout')
+def logout():
+    session.pop('user')
+    return redirect('/Login')
 
 # Will catch any 404 error
 if __name__ == '__main__':
     app.run(debug=True)
+

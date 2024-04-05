@@ -18,25 +18,39 @@
     </div>
 </div>
 <div class="signup_main">
+
     <div class="signup_container">
         <img class="signup_logo" src="{{url_for('static', filename='img/logo.png')}}" alt="logo">
         <div class="signup_signup-container">
 
-            <form class="signup_signup-form" action="/Signup" method="post">
+            {% if exist_message %}
+
+            <div class = "alert alert-danger">
+
+                <center> {{exist_message}}</center>
+
+           </div>
+           {% endif %}
+            <form class="signup_signup-form" action="/Signup" method="POST">
+
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+            
                 <label for="business-name">Business Name:</label>
                 <input type="text" id="business-name" name="business-name" required>
             
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="txtNewPassword">Password</label>
+                <input type="password" id="pswd1" name="user_pwd0" required>
+
+                <label for="txtconfirmpassword">Confirm Password</label>
+                <input type="password" id="password" name="user_pwd1" required >
                 
-                <button type="submit">Signup</button>
-            </form>
+                <button type="submit">Register</button>
+            </form> 
         </div>
     </div>
 </div>
 </body>
-</html>
-
