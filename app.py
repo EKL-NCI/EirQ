@@ -64,6 +64,8 @@ def index():
 
 @app.route('/Login', methods=['GET', 'POST'])
 def login():
+    error_message = None
+    
     if session.get('user'):
         return 'Welcome {}'.format(session['user'])
     
@@ -77,11 +79,17 @@ def login():
             # Redirect to the sensors page upon successful login
             return redirect(url_for('sensors'))
         except Exception as e:
+            error_message = "Failed Login: {}".format(str(e))
             print("Login failed for user:", email, "with error:", str(e))  # Log failed login attempt
-            return render_template('Login.html', error_message="Failed Login")
-    
-    return render_template('Login.html')
 
+            # Check if the error message contains "INVALID_LOGIN_CREDENTIALS"
+            if "INVALID_LOGIN_CREDENTIALS" in error_message:
+                error_message = "Invalid email or password. Please try again."
+
+            if "TOO_MANY_ATTEMPTS_TRY_LATER" in error_message:
+                error_message = "Too many failed login attempts. Please try again later or contact support."
+    
+    return render_template('Login.html' , error_message=error_message)
 
 
 @app.route('/Signup', methods=['GET', 'POST'])

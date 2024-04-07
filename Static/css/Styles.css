@@ -52,6 +52,23 @@
 .form-label {
     font-size: large;
 }      
+.custom-alert {
+    position: fixed; /* Fixed position */
+    top: 200px; /* Distance from the top of the viewport */
+    right: 80px; /* Distance from the right of the viewport */
+    width: 270px; /* Width of the alert box */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #0d6ef3 ; 
+    color: #ffffff; /* White text color */
+    border-color: #0c69f3 ; 
+    padding: 10px; /* Padding around the alert */
+    font-size: 16px; 
+    font-weight: bold;
+    z-index: 1050; /* Ensure alert is above other content */
+}
+.custom-alert .btn-close {
+    color: #fff;  /* White color for the close button */
+}
 /* Login End */  
     
 
