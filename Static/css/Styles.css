@@ -1,302 +1,83 @@
-/*Main*/
-body {
-    background-color: #35daff;
-    font-family: 'Nova Square', sans-serif;
-}
+/* Main */
+/* Footer */
+.footer {
 
-.main_header {
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    background-color:black;
-    width: 100%;
-    height: 100px;
-}
-
-.main_logoImg{
-    width: 100px;
-    height: 100px;
-    position: center;
-}
-
-.main_logo {
-    background-color: black;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    position: center;
-}
-
-.main_menu {
-    position: relative;
-    background-color: #35daff;
-    width: 100px;
-    height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.main_menuImg {
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    position: center;
-}
-
-.main_menuOptions {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 120px;
-    background-color: black;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.main_menu:hover .main_menuOptions {
-    display: flex;
-    flex-direction: column;
-}
-
-.main_menuOptions a {
-    color: white;
-    text-decoration: none;
-    padding: 5px;
-    transition: background-color 0.3s ease;
-}
-
-.main_menuOptions a:hover {
-    background-color: black;
-}
-
-.main_main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    min-height: calc(100vh - 100px); /* Subtract the header height */
+    background-color: #212529;
     padding: 20px 0;
-    background-color: black;
-}
-
-.main_container {
-    background-color: #ffffff;
-    width: 80%;
-    max-width: 600px;
-    margin: 20px auto; /* Margin top should be enough to not hide behind the header */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    overflow-y: auto; /* Allows scrolling within the container */
-    max-height: 80vh; /* Sets a maximum height to prevent it from getting too tall */
-}
-
-.info_paragraph {
-    text-align: center; 
-    color: white; 
-    padding: 20px; 
-    background-color: black; 
-    margin: 40px 0; /* Add some top and bottom margin */
-    border-radius: 8px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-}
-
-/*Signup*/
-.signup_header {
-    display: flex;
-    align-items: center;
-    position: relative;
-    background-color: rgb(0, 0, 0);
-    width: 100%;
-    height: 100px;
-}
-
-.signup_home {
-    width: 100px;
-    height: 100px;
-}
-
-.signup_homeBut {
-    width: 100px;
-    height: 100px;
-}
-
-.signup_homeImg {
-    width: 100px;
-    height: 100px;
-}
-
-.signup_main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    height: 800px;
-    background-color: black;
-}
-
-.signup_container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.signup_logo {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-}
-
-.signup_signup-container {
     text-align: center;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 300px;
-    margin-bottom: 20px;
+    color:aliceblue
 }
-
-.signup_signup-form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
+.footer-left {
+    text-align: left;
 }
-
-label {
-    display: block;
-    margin-bottom: 10px;
+.footer-right {
+    text-align: right;
 }
-
-input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-button {
-    padding: 12px;
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    align-self: center;
-}
+.footer-logo {
+    max-width: 300px; 
+    height: auto;
+}       
+/* Main End */        
 
 
-/*Login*/
-.login_header {
-    display: flex;
-    align-items: center;
-    position: relative;
-    background-color: black;
-    width: 100%;
-    height: 100px;
+
+
+
+
+/* Login */
+.login-page {
+    background-image: url("{{ url_for('static', filename='img/skybg.png') }}"); 
+    background-position: center;
+}
+    
+
+.custom-mt-5 {
+    margin-top: 12rem; 
 }
 
-.login_home{
-    width: 100px;
-    height: 100px;
+.card {
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(2px);
 }
-.login_homeBut{
-    width: 100px;
-    height: 100px;
+.form-control {
+    border-radius: 20px; /* Закругляем углы полей для ввода */
+    background-color: rgba(255, 255, 255, 0.3); /* Прозрачный белый цвет */
+    backdrop-filter: blur(2px); /*  размытие к полю для ввода */
 }
-.login_homeImg{
-    width: 100px;
-    height: 100px;
+.btn-login {/* кнопка */
+    border-radius: 20px; /* Закругляем углы кнопки */
+    width: 150px; 
+}
+.form-label {
+    font-size: large;
+}      
+/* Login End */  
+    
+
+
+
+
+/* Signup */
+.signup-page{
+    background-image: url('img/skybg.png'); 
+    background-position: center;
+}
+.btn-signup { /* кнопка */
+    border-radius: 20px; 
+    width: 150px; 
+}      
+/* Signup End */  
+
+.custom-color{
+    color: #234B99 ;
+}
+.custom-color2{
+    color: #012368 ; 
 }
 
-.login_main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    height: 800px;
-    background-color: black;
-}
 
-.login_container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-.login_logo {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-}
-
-.login_login-container {
-    text-align: center;
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 300px;
-    margin-bottom: 20px;
-}
-
-.login_login-form {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-}
-
-input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-button {
-    padding: 12px;
-    background-color: black;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    align-self: center;
-}
-
-/* Sensor Page Specific Styles */
-.sensor_header {
-    display: flex;
-    align-items: center;
-    position: relative;
-    background-color: black;
-    width: 100%;
-    height: 100px;
-}
-
-.sensor_main {
-    width: 80%; 
-    max-width: 600px; 
-    margin-top: 120px; /* Push down from fixed header */
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: #35daff; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* shadow for depth */
-}
-
+/* Sensor Page Specific Styles 
 #messages {
     background-color: white; 
     padding: 20px;
@@ -309,38 +90,32 @@ button {
 }
 
 #messages p {
-    background-color: #2b3a52; /* Slightly lighter blue for paragraph */
+    background-color: #2b3a52; 
     color: #ffffff; 
-    padding: 10px; /* Padding inside paragraphs */
-    margin: 10px 0; /* Margin between paragraphs */
+    padding: 10px; 
+    margin: 10px 0; 
     border-radius: 4px; 
     font-size: 0.9rem; 
-    line-height: 1.4; /* Line height for better readability */
-    word-wrap: break-word; /* Ensure long text wraps */
+    line-height: 1.4; 
+    word-wrap: break-word; 
+}
+*/
+
+.sensor-info {
+    display: inline-block; /* Для отображения элементов в одной линии */
+    background-color: #f0f0f0; /* Цвет фона поля */
+    padding: 10px; /* Отступы вокруг текста */
+    margin: 5px; /* Внешний отступ между элементами */
+    border-radius: 5px; /* Закругленные углы поля */
 }
 
-.sensor_home{
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    float: left;
+/* verify page */
+.custom-color2 .increase-text-size {
+    font-size: 1.2em; /* Выберите размер, который подходит вам */
 }
-
-.sensor_homeBut{
-    width: 100px;
-    height: 100px;
-    float: left;
+.custom-card-opacity {
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.5); /* Уменьшаем прозрачность карты */
+    backdrop-filter: blur(5px);
 }
-
-.sensor_homeImg{
-    width: 100px;
-    height: 100px;
-    float: left;
-}
-
-.sensor_main h1 {
-    color: #ffffff;
-    text-align: center;
-    padding-top: 20px; /* Additional padding to push it below the fixed header */
-    margin-bottom: 20px; 
-}
+/* verify page end */

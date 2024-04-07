@@ -3,40 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>EirQ Solutions</title>
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.11.min.js"></script>
     <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
 </head>
-<body>
-    <div class="main_header">
-        <div class="sensor_home">
-            <a class="sensor_homeBut" href="/"><img class="sensor_homeImg" src="{{url_for('static', filename='img/home.png')}}" alt="home"></a>
-        </div>
-        <div class="main_logo">
-            <img src="{{url_for('static', filename='img/logo.png')}}" alt="EirQ Solutions Logo" class="main_logoImg">
-        </div>
-        <div class="main_menu">
-            <!-- Include navigation items here -->
-            <img class="main_menuImg" src="{{url_for('static', filename='img/menu.png')}}" alt="menu">
-            <div class="main_menuOptions">
-                <a href="/Login">Login</a>
-                <a href="/Signup">Sign Up</a>
-                <a href="/Sensors">View Sensors</a>
-            </div>
-            
-        </div>
-    </div>
 
+<body class="sensor-page">
+
+    <style>
+        .sensor-page {
+            background-image: url("{{ url_for('static', filename='img/skybg.png') }}"); 
+            background-position: center;
+        }
+    </style>
+    
+    <nav class="navbar navbar-dark bg-dark" aria-label="label">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mx-auto" href="#">
+                <img src="{{url_for('static', filename='img/logoFull1.png')}}" alt="logo" width="180"  class="rounded">
+            </a>
+            <div class="navbar-collapse collapse" id="navbarsExample01" style>
+                <ul class="navbar-nav me-auto mb2">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Main</a></li>
+                    <!--<li class="nav-item"><a class="nav-link" aria-current="page" href=/Login>Login</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="#">Sensor Page</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+<!--
     <div class="main_main">
-        <div class="sensor_main">s
+        <div class="sensor_main">
             <h1>Air Quality - Live </h1>
             <div id="messages" class="main_container" style="text-align: center;">
-                <!-- Sensor data will be populated here -->
+                
                 {% for msg in data %}
                     <p>Timestamp: {{ msg.timestamp }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>
                 {% endfor %}
             </div>
         </div>
     </div>
+-->
+<!--
+<div class="container custom-mt-5 ">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body custom-color2">
+                        <h5 class="card-title text-center mb-4 custom-color2 display-6 fw-normal">Air Quality - Live</h5>
+                        <div id="messages" class="main_container" style="text-align: center;">
+                            
+                            {% for msg in data %}
+                                <p>Timestamp: {{ msg.timestamp }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+
+
+<div class="container custom-mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body custom-color2">
+                    <h5 class="card-title text-center mb-4 custom-color2 display-6 fw-normal">Air Quality - Live</h5>
+                    <!-- Здесь мы используем информацию с сенсора вместо полей для заполнения -->
+                    <div id="messages" class="main_container" style="text-align: center;">
+                        <!-- Sensor data will be populated here -->
+                        {% for msg in data %}
+                            <div class="sensor-info">
+                                <p class="sensor-data">Timestamp: {{ msg.timestamp }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

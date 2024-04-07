@@ -5,6 +5,7 @@
     <title>Main</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nova+Square&display=swap" rel="stylesheet">
@@ -13,31 +14,116 @@
 <body>
 
 <!-- Navigation -->
-<div class="main_header">
-    <div class="main_menu">
-        <img class="main_menuImg" src="{{url_for('static', filename='img/menu.png')}}" alt="menu" >
-        <div class="main_menuOptions">
-            <a href=/Login>Login</a>
-            <a href=/Signup>Sign Up</a>
-            <a href=/Sensors>View Sensors</a>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark" aria-label="label">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mx-auto" href="#">
+                <img src="{{url_for('static', filename='img/logoFull1.png')}}" alt="logo" width="180"  class="rounded">
+            </a>
+            <div class="navbar-collapse collapse" id="navbarsExample01" style>
+                <ul class="navbar-nav me-auto mb2">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href=/Login>Login</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href=/Signup>Signup</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href=/Sensors>Sensor Page</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+
+    <img src="{{url_for('static', filename='img/headImg2.png')}}" class="img-fluid" alt="headImg1">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-1 text-center mb-5 mt-5 color1 fw-normal custom-color">EirQ Solutions</h1>
+            </div>
         </div>
     </div>
-    <div class="main_logo"><img class="main_logoImg" src="{{url_for('static', filename='img/logo.png')}}" alt="logo" ></div>
-</div>
+    <section class="about">
+        <div class="container">
+            <div class="row align-items-start mb-5 mt-5">
+                <div class="col-lg-7  col-sm-12">
+                    <h5 class="text-wrap text-break">
+                        TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText
+                    </h5>
+                    <h5 class="text-wrap text-break">
+                        TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText
+                    </h5>
+                    <h5 class="text-wrap text-break">
+                        TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText
+                    </h5>
+                    <h5 class="text-wrap text-break">
+                        TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText
+                    </h5>
+                    <h5 class="text-wrap text-break">
+                        TextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextTextText
+                    </h5> 
+                </div>
+                <div class="col-lg-5 col-sm-12 text-center">
+                    <img src="{{url_for('static', filename='img/stepan.png')}}" alt="stepan" class="img-fluid">
+                </div>
+            </div>
+        </div>   
+        <div class="container">
+            <div class="row align-items-start mb-5 mt-5">
+                <div class="col-lg-5 col-sm-12 text-center">
+                    <img src="{{url_for('static', filename='img/stepan1.png')}}" alt="stepan" class="img-fluid">
+                </div>
+                <div class="col-lg-7  col-sm-12">
+                    <h5 class="text-wrap text-break">CatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCat
+                    </h5>
+                    <h5 class="text-wrap text-break">CatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCat
+                    </h5>
+                    <h5 class="text-wrap text-break">CatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCatCat
+                    </h5>
+                </div>
+            </div>
+        </div>  
+        <div class="container">
+            <div class="row align-items-start mb-5 mt-5">
+                <div class="col-lg-7  col-sm-12">
+                    <h5 class="text-wrap text-break">MilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilk
+                    </h5>
+                    <h5 class="text-wrap text-break">MilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilk
+                    </h5>
+                    <h5 class="text-wrap text-break">MilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilk
+                    </h5>
+                    <h5 class="text-wrap text-break">MilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilk
+                    </h5>
+                    <h5 class="text-wrap text-break">MilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilk
+                    </h5> 
+                    <h5 class="text-wrap text-break">MilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilkMilk
+                    </h5> 
+                </div>
+                <div class="col-lg-5 col-sm-12 text-center">
+                    <img src="{{url_for('static', filename='img/stepan2.png')}}" alt="stepan" class="img-fluid">
+                </div>
+            </div>
+        </div> 
+    </section>  
 
-<div class="main_main">
-    <div class="main_container">
-        <div class="info_paragraph">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum. Sed nec felis pellentesque, luctus nisi sed, ullamcorper felis. In in libero eget nunc consequat interdum. Curabitur ultrices consequat bibendum. Praesent id imperdiet erat. Nullam vestibulum lorem at leo mollis, nec aliquam magna pellentesque.</p>
-
-            <p>Etiam vitae massa sed turpis mollis auctor. Sed suscipit, ipsum nec congue fermentum, arcu felis luctus sem, eget vehicula metus mi at lacus. Donec porta, eros in luctus faucibus, arcu ante lacinia eros, eget facilisis dui sapien ut lacus. Praesent non nisi tellus. Duis ac risus eget nunc porta venenatis viverra nec lacus.</p>
-
-            <p>Nunc vitae libero lacus. Pellentesque vitae velit ex. Mauris pharetra sem quam. Duis tincidunt sed nisi sed pretium. Cras elit nisi, elementum eu ultricies vel, aliquet ut dolor. Duis bibendum ullamcorper orci, non sollicitudin sapien. Sed et vehicula elit.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 footer-left mt-5">
+                    <p class="fs-5"><strong>Erin Lee:</strong> x22353461, x22353461@student.ncirl.ie</p>
+                    <p class="fs-5"><strong>Josh McGlynn:</strong> x21358616, x21358616@student.ncirl.ie</p>
+                    <p class="fs-5"><strong>Morris Ouedraogo:</strong> x20461702, x20461702@student.ncirl.ie</p>
+                    <p class="fs-5"><strong>Dmytro Zadorozhnyi:</strong> x21516939, x21516939@student.ncirl.ie</p>
+                </div>
+                <div class="col-md-6 footer-right">
+                    <img src="{{url_for('static', filename='img/logo1.png')}}" alt="footer-logo" class="footer-logo rounded" height="300">
+                </div>
+            </div>
         </div>
-
-    </div>
-</div>
-
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
 
