@@ -65,9 +65,12 @@ def index():
 @app.route('/Login', methods=['GET', 'POST'])
 def login():
     error_message = None
-    
+
+    #if session.get('user'):
+        #return 'Welcome {}'.format(session['user'])
+
     if session.get('user'):
-        return 'Welcome {}'.format(session['user'])
+        return redirect(url_for('sensors'))   
     
     if request.method == 'POST':
         email = request.form.get('email')
@@ -137,6 +140,11 @@ def sensors():
 @app.route('/Verify')
 def verify_email():
     return render_template('Verify_email.html')
+
+
+@app.route('/Chart')
+def charts():
+    return render_template('My_chart.html')
 
 
 @app.route('/Logout')

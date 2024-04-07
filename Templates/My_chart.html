@@ -1,14 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>My Charts</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=	, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nova+Square&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    <div>
-        <h1>Some Template</h1>
-        <p>Some content</p>
+
+<style>
+    .charts-page {
+        background-image: url("{{ url_for('static', filename='img/skybg.png') }}"); 
+        background-position: center;
+    }
+
+    .center-div {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<body class="charts-page">
+
+    <nav class="navbar navbar-dark bg-dark" aria-label="label">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand mx-auto" href="#">
+                <img src="{{url_for('static', filename='img/logoFull1.png')}}" alt="logo" width="180"  class="rounded">
+            </a>
+            <div class="navbar-collapse collapse" id="navbarsExample01" style>
+                <ul class="navbar-nav me-auto mb2">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Main</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="/Sensors">Sensor</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href=/Login>Login</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container custom-mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                <div class="card custom-card-opacity">
+                    <div class="card-body custom-color2">
+                        <h5 class="card-title text-center mb-4 custom-color2 display-6 fw-normal">Air Quality Chart</h5>
+                        <div class="center-div"> <!-- Center the chart -->
+                            <canvas id="airQualityChart" width="400" height="200"></canvas>
+                        </div>
+    
+                        <script>
+                            // Get the canvas element
+                            var ctx = document.getElementById('airQualityChart').getContext('2d');
+                    
+                            // Define the data for the chart
+                            var data = {
+                                labels: ['Temperature','eCO2'],
+                                datasets: [{
+                                    label: 'Air Quality',
+                                    data: [17, 200], // Sample data
+                                    backgroundColor: [
+                                        'rgba(0, 0, 255, 0.7)',  // Blue for Temperature
+                                        'rgba(138, 43, 226, 0.7)' // Purple for eCO2
+                             
+                                    ],
+                                    borderWidth: 0
+                                }]
+                            };
+                    
+                            // Define the options for the chart
+                            var options = {
+                                responsive: false, // Make the chart non-responsive
+                                cutout: '50%', // Make a hole in the middle of the doughnut chart
+                                plugins: {
+                                    legend: {
+                                        position: 'bottom' // Position the legend at the bottom
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            label: function(context) {
+                                                var label = context.dataset.label || '';
+                                                if (label) {
+                                                    label += ': ';
+                                                }
+                                                if (context.parsed) {
+                                                    if (context.datasetIndex == 0) {
+                                                        label += context.parsed + ' ppm'; // Display eCO2 in ppm
+                                                    } else if (context.datasetIndex == 1) {
+                                                        label += context.parsed + ' °C'; // Display temperature in degrees Celsius
+                                                    }
+                                                }
+                                                return label;
+                                            }
+                                        }
+                                    }
+                                }
+                            };
+                    
+                            // Create the doughnut chart
+                            var myDoughnutChart = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: data,
+                                options: options
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-login" onclick="displayGraph()">Display Graph</button>
+    </div>              
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
