@@ -41,12 +41,12 @@
     backdrop-filter: blur(2px);
 }
 .form-control {
-    border-radius: 20px; /* Закругляем углы полей для ввода */
-    background-color: rgba(255, 255, 255, 0.3); /* Прозрачный белый цвет */
-    backdrop-filter: blur(2px); /*  размытие к полю для ввода */
+    border-radius: 20px; /* Rounding the corners of input fields */
+    background-color: rgba(255, 255, 255, 0.3); /* Transparent white color */
+    backdrop-filter: blur(2px); /*  blur to the input field */
 }
-.btn-login {/* кнопка */
-    border-radius: 20px; /* Закругляем углы кнопки */
+.btn-login {/* button */
+    border-radius: 20px; /* Round the corners of the button */
     width: 150px; 
 }
 .form-label {
@@ -93,46 +93,21 @@
     color: #012368 ; 
 }
 
-
-/* Sensor Page Specific Styles 
-#messages {
-    background-color: white; 
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 600px; 
-    margin: 20px 0; 
-    text-align: center; 
-}
-
-#messages p {
-    background-color: #2b3a52; 
-    color: #ffffff; 
-    padding: 10px; 
-    margin: 10px 0; 
-    border-radius: 4px; 
-    font-size: 0.9rem; 
-    line-height: 1.4; 
-    word-wrap: break-word; 
-}
-*/
-
 .sensor-info {
-    display: inline-block; /* Для отображения элементов в одной линии */
-    background-color: #f0f0f0; /* Цвет фона поля */
-    padding: 10px; /* Отступы вокруг текста */
-    margin: 5px; /* Внешний отступ между элементами */
-    border-radius: 5px; /* Закругленные углы поля */
+    display: inline-block; /* To display items in a single line */
+    background-color: #f0f0f0; /* Field background color */
+    padding: 10px; /* Indents around text */
+    margin: 5px; /* External indentation between elements */
+    border-radius: 5px; /* Rounded field corners */
 }
 
 /* verify page */
 .custom-color2 .increase-text-size {
-    font-size: 1.2em; /* Выберите размер, который подходит вам */
+    font-size: 1.2em; 
 }
 .custom-card-opacity {
     border: 0;
-    background-color: rgba(255, 255, 255, 0.5); /* Уменьшаем прозрачность карты */
+    background-color: rgba(255, 255, 255, 0.5); /* Decrease the transparency of the map */
     backdrop-filter: blur(5px);
 }
 /* verify page end */
