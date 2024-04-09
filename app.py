@@ -146,11 +146,14 @@ def verify_email():
 def charts():
     return render_template('My_chart.html')
 
+@app.route('/Dashboard')
+def dashboard():
+    return render_template('Dashboard.html')
 
 @app.route('/Logout')
 def logout():
     session.pop('user')
-    return redirect('/Login')
+    return redirect('/')
 
 # Will catch any 404 error
 if __name__ == '__main__':
