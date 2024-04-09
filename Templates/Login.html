@@ -10,15 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nova+Square&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
 </head>
+<style>
+    .login-page {
+        background-image: url("{{ url_for('static', filename='img/skybg.png') }}"); 
+        background-position: center;
+    }
+</style>
 <body class="login-page">
-
-    <style>
-        .login-page {
-            background-image: url("{{ url_for('static', filename='img/skybg.png') }}"); 
-            background-position: center;
-        }
-    </style>
-
+    
 <div class="login_header">
     <nav class="navbar navbar-dark bg-dark" aria-label="label">
         <div class="container-fluid">

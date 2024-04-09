@@ -3,7 +3,7 @@ from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
 from pubnub.callbacks import SubscribeCallback
 import firebase_admin
-from firebase_admin import credentials, db, auth ,firestore
+from firebase_admin import credentials, db, auth ,firestore #Import from Firebase App
 import pyrebase
 from collections.abc import MutableMapping
 
@@ -11,20 +11,20 @@ app = Flask(__name__)
 
 # Firebase service account cred!
 cred = credentials.Certificate("credentials.json")
-firebase_admin.initialize_app(cred, name="app", options={'databaseURL': 'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
+firebase_admin.initialize_app(cred, options={'databaseURL': 'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
 
 # Secret key for the app
 app.config['SECRET_KEY'] = 'EirqSecretKey'
 
 # PubNub configuration
-
 pnconfig = PNConfiguration()
 pnconfig.subscribe_key = 'sub-c-6afc2464-b330-469f-a68d-52cbba8aecc4'
 pnconfig.uuid = 'flask_demo_server'
 pubnub = PubNub(pnconfig)
 messages = []
 
-database = firestore.client(app=firebase_admin.get_app("app"))
+# Firestore Client - Allow users to interact with firestore database
+database = firestore.client()
 
 
 # Firebase Confifuration
@@ -40,10 +40,10 @@ firebase_config = {
             'measurementId': "G-KRKNJRRQMY"
 }
 
-firebase = pyrebase.initialize_app(firebase_config)
-auth = firebase.auth()
+firebase = pyrebase.initialize_app(firebase_config)  # Initialise Pyrebase with Firebase configuration
+auth = firebase.auth()  # Get authentication object from Pyrebase)
 
-# Define the SubscribeCallback class
+
 class MySubscribeCallback(SubscribeCallback):
     def message(self, pubnub, message):
         # Append received message to the messages list
@@ -51,6 +51,7 @@ class MySubscribeCallback(SubscribeCallback):
         # Stores the received message in Firebase Realtime Database
         ref = db.reference('air_quality')
         ref.push(message.message)
+  
 
 # Adding the listener and subscribing to the channel
 def subscribe_to_channel():
@@ -110,27 +111,41 @@ def signup():
         name = request.form['name']
         password = request.form['user_pwd1']
 
+        # Check if the email already exists
+        user_exists = check_email_exists(email)
+        if user_exists:
+            return render_template('Signup.html', error_message="Email already exists. Please login instead.")
+        
         try:
             user = auth.create_user_with_email_and_password(email, password)
             auth.send_email_verification(user['idToken'])
 
             users = {
-            
                 'name': name,
                 'business-name': businessName,
                 'email': email,
                 'user_pwd1': password
             }  
             
-            database.collection('User_data').add(users)
+            # Store the email in session to indicate that email verification is pending
+            session['email_verification_pending'] = email
 
+            # Redirect to the verify email page
             return render_template('Verify_email.html', email=email)
-        
+
         except Exception as e:
             print("Error:", str(e))  # Print the error message for debugging
             return "Cannot be verified due to an error: {}".format(str(e))
+        
+    database.collection('User_data').add(users)  # Add user data to Firestore
     
     return render_template('Signup.html', message="SignUp successful!")
+
+def check_email_exists(email):
+    # Query Firestore to check if email already exists
+    users_ref = database.collection('User_data')
+    query = users_ref.where('email', '==', email).get()
+    return len(query) > 0
 
 
 @app.route('/Sensors')
@@ -158,5 +173,6 @@ def logout():
 
 # Will catch any 404 error
 if __name__ == '__main__':
+    subscribe_to_channel()  # Start listening for PubNub messages
     app.run(debug=True)
 
