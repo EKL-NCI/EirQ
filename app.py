@@ -11,21 +11,21 @@ app = Flask(__name__)
 
 # Firebase service account cred!
 cred = credentials.Certificate("credentials.json")
-try:
-    firebase_admin.initialize_app(cred, name="sensor", options={'databaseURL': 'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
-except ValueError as e:
-    print("Error initializing Firebase:", e)
+firebase_admin.initialize_app(cred, name="app", options={'databaseURL': 'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
+
 # Secret key for the app
 app.config['SECRET_KEY'] = 'EirqSecretKey'
 
 # PubNub configuration
+
 pnconfig = PNConfiguration()
 pnconfig.subscribe_key = 'sub-c-6afc2464-b330-469f-a68d-52cbba8aecc4'
 pnconfig.uuid = 'flask_demo_server'
 pubnub = PubNub(pnconfig)
 messages = []
 
-db = firestore.client(app=firebase_admin.get_app("sensor"))
+database = firestore.client(app=firebase_admin.get_app("app"))
+
 
 # Firebase Confifuration
 firebase_config = {   
@@ -43,19 +43,20 @@ firebase_config = {
 firebase = pyrebase.initialize_app(firebase_config)
 auth = firebase.auth()
 
-    
+# Define the SubscribeCallback class
 class MySubscribeCallback(SubscribeCallback):
     def message(self, pubnub, message):
         # Append received message to the messages list
         messages.append(message.message)
         # Stores the received message in Firebase Realtime Database
-        ref = db.reference('/air_quality')
+        ref = db.reference('air_quality')
         ref.push(message.message)
 
 # Adding the listener and subscribing to the channel
 def subscribe_to_channel():
     pubnub.add_listener(MySubscribeCallback())
     pubnub.subscribe().channels('aq_channel').execute()
+
 
 # Routing to pages
 @app.route('/')
@@ -121,7 +122,7 @@ def signup():
                 'user_pwd1': password
             }  
             
-            db.collection('User_data').add(users)
+            database.collection('User_data').add(users)
 
             return render_template('Verify_email.html', email=email)
         

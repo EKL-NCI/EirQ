@@ -9,8 +9,45 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nova+Square&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+   
+
+    const firebaseConfig = {
+        
+        apiKey: "AIzaSyCVDRhmU_ps8O0GNI9FjqmR6oh67ariS3s",
+        authDomain: "eirq-solutions.firebaseapp.com",
+        databaseURL: "https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "eirq-solutions",
+        storageBucket: "eirq-solutions.appspot.com",
+        messagingSenderId: "931290153741",
+        appId: "1:931290153741:web:d8edcb6428ff83a5352644",
+        measurementId: "G-KRKNJRRQMY"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const firebaseRef = ref(database, 'air_quality');
+
+        get(firebaseRef).then((snapshot) => {
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                for (let i in data) {
+                    console.log(data[i]);
+                }
+            } else {
+                console.log("No data available");
+            }
+        }).catch((error) => {
+            console.error("Error fetching data:", error);
+        });
+    </script>
 
 <style>
     .charts-page {
@@ -22,10 +59,10 @@
         display: flex;
         justify-content: center;
     }
+    
 </style>
 
 <body class="charts-page">
-
     <nav class="navbar navbar-dark bg-dark" aria-label="label">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="true" aria-label="Toggle navigation">
@@ -45,80 +82,75 @@
         </div>
     </nav>
 
+
     <div class="container custom-mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card custom-card-opacity">
                     <div class="card-body custom-color2">
-                        <h5 class="card-title text-center mb-4 custom-color2 display-6 fw-normal">Air Quality Chart</h5>
+                        <h5 class="card-title text-center mb-4 custom-color2 display-6 fw-normal"> eCO2</h5>
                         <div class="center-div"> <!-- Center the chart -->
                             <canvas id="airQualityChart" width="400" height="200"></canvas>
+
+                            </div>
                         </div>
-    
-                        <script>
-                            // Get the canvas element
-                            var ctx = document.getElementById('airQualityChart').getContext('2d');
-                    
-                            // Define the data for the chart
-                            var data = {
-                                labels: ['Temperature','eCO2'],
-                                datasets: [{
-                                    label: 'Air Quality',
-                                    data: [17, 200], // Sample data
-                                    backgroundColor: [
-                                    'rgba(0, 0, 255, 0.5)',  // Slightly dark blue for Temperature
-                                    'rgba(138, 43, 226, 0.5)'// Slightly dark purple for Temperature
-                                    ],
-                                    borderWidth: 0
-                                }]
-                            };
-                    
-                            // Define the options for the chart
-                            var options = {
-                                responsive: false, // Make the chart non-responsive
-                                cutout: '50%', // Make a hole in the middle of the doughnut chart
-                                plugins: {
-                                    legend: {
-                                        position: 'bottom' // Position the legend at the bottom
-                                    },
-                                    tooltip: {
-                                        callbacks: {
-                                            label: function(context) {
-                                                var label = '';
-                                                if (context.dataset.label) {
-                                                    label += context.dataset.label + ': ';
-                                                }
-                                                if (context.parsed) {
-                                                    label += context.parsed;
-                                                    if (context.datasetIndex === 0) {
-                                                        label += ' °C'; // Add Celsius unit for temperature
-                                                    } else if (context.datasetIndex === 1) {
-                                                        label += ' ppm'; // Add ppm unit for eCO2
-                                                    }
-                                                }
-                                                return label;
-                                            }
-                                        }
-                                    }
-                                }
-                            };
-                    
-                            // Create the doughnut chart
-                            var myDoughnutChart = new Chart(ctx, {
-                                type: 'doughnut',
-                                data: data,
-                                options: options
-                            });
-                        </script>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-login" onclick="displayAirQuality()">Update</button>
-    </div>              
+</body>
+      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
+<footer>
+
+   
+    <script>
+      
+            var data = {
+                labels: [0],
+                datasets: [
+                    {
+                    label: 'eC02',
+                    data: [0], // Initial sample data
+                    backgroundColor: 'rgba(0, 255, 0, 1)', // Green
+                    lineTension: 0.5,
+                    borderColor: 'rgba(0, 255, 0, 1)'
+                  
+                }
+            ]
+        };
+
+        var config = {
+            type : 'line',
+            data : data,
+        };
+
+
+        var airQualityChart = new Chart(
+            document.getElementById('airQualityChart'),
+            config
+        );
+
+        window.setInterval(mycallback,2000);
+
+        function mycallback() {
+            var now =  new Date();
+            now = now.getHours() + ":" + now.getMinutes()+ ":" + now.getSeconds();
+            var value = Math.floor(Math.random()*500);
+            if(data.datasets[0].data.length>=10){
+                data.labels.shift();
+                data.datasets[0].data.shift();
+
+        }
+            data.labels.push(now); 
+            data.datasets[0].data.push(value);
+            airQualityChart.update();
+           // $('footer').html(now + " " + value + " ppm");
+        }
+    </script>
+
+</footer>
+
 </html>
