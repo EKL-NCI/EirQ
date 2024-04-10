@@ -2,7 +2,7 @@
 /* Footer */
 .footer {
 
-    background-color: #26d4ff;
+    background: linear-gradient(135deg,#187de3,#ffffff);
     padding: 20px 0;
     text-align: center;
     color:aliceblue
@@ -20,7 +20,7 @@
 /* Main End */        
 
 .custom-bg-color {
-    background-color: #26d4ff !important; /* !important to override default Bootstrap style */
+    background: linear-gradient(135deg,#187de3,#ffffff) !important; /* !important to override default Bootstrap style */
 }
 
 
@@ -53,6 +53,7 @@
 }
 .form-label {
     font-size: large;
+    color: white;
 }      
 .custom-alert {
     position: fixed; /* Fixed position */
@@ -118,11 +119,11 @@
 
 .card {
     width: 100%;
-    max-width: 470;
-    background: linear-gradient(135deg,#26d4ff,#ffffff);
+    max-width: 450;
+    background: linear-gradient(135deg,#187de3,#ffffff);
     color: #fff;
     border-radius: 20px;
-    padding: 40px 35px;
+    padding: 30px 25px;
     text-align: center;
 }
 
@@ -138,12 +139,12 @@
         outline: 0;
         background:#ebfffc;
         color: #555;
-        padding: 10px,25px;
-        height: 60px;
-        border-radius: 30px;
+        padding: 10px,20px;
+        height: 40px;
+        border-radius: 20px;
         flex:1;
-        margin-right: 16px;
-        font-size: 18px;
+        margin-right: 10px;
+        font-size: 14px;
         align-items: center;
 }
 
@@ -151,9 +152,9 @@
         border: 0;
         outline: 0;
         background: #ebfffc;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
+        border-radius: 40%;
+        width: 50px;
+        height: 40px;
         cursor: pointer;
 }
 
@@ -162,19 +163,19 @@
 
 }
 .weather-icon{
-        width: 170px;
-        margin-top: 30px;
+        width: 120px;
+        margin-top: 20px;
 }
 
 .weather h1{
-        font-size: 78px;
-        font-weight: 500;
+        font-size: 60px;
+        font-weight: 400;
         color: #fff;
 }
 
 .weather h2{
-        font-size: 45px;
-        font-weight: 400;
+        font-size: 30px;
+        font-weight: 300;
         color: #fff;
         margin-top: -10px;
 }
@@ -183,10 +184,10 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding:0 20px;
-    margin-top: 50px;
+    padding:0 10px;
+    margin-top: 40px;
     color:#fff;
-    font-size: 25px;
+    font-size: 17px;
     font-weight: 200;
 }
 
@@ -250,4 +251,5 @@
     .sidebar .navbar-brand img {
         width: 100px; /* degris logo size for small screen */
     }
+
 }
