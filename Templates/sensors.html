@@ -49,7 +49,7 @@
                         <!-- Sensor data will be populated here -->
                         {% for msg in data %}
                             <div class="sensor-info">
-                                <p class="sensor-data">Timestamp: {{ msg.timestamp }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>
+                                <p class="sensor-data">Timestamp: {{ msg.timestamp }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm {{ msg.warning_level }}</p>
                             </div>
                         {% endfor %}
                     </div>
