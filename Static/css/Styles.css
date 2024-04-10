@@ -218,3 +218,36 @@
     background-color: transparent;
     color: #fff;
 }
+
+
+/* side nav bar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* on other lements */
+    padding: 48px 0 0; /* top padding  */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* shadow */
+}
+
+.sidebar .nav-link {
+    color: #fff; /* Цвет ссылок */
+}
+
+/* adapt side bar */
+@media (min-width: 768px) {
+    .sidebar {
+        width: 230px; /* width on big screen */
+    }
+}
+
+@media (max-width: 767.98px) {
+    .sidebar {
+        width: 72px; /* width on small screen */
+    }
+
+    .sidebar .navbar-brand img {
+        width: 100px; /* degris logo size for small screen */
+    }
+}
