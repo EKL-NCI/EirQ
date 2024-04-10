@@ -160,7 +160,7 @@ def verify_email():
 
 @app.route('/Chart')
 def charts():
-    return render_template('My_chart.html')
+    return render_template('My_chart.html',data=messages) #changed from sensor to chart
 
 @app.route('/Dashboard')
 def dashboard():
