@@ -68,9 +68,6 @@ def index():
 def login():
     error_message = None
 
-    #if session.get('user'):
-        #return 'Welcome {}'.format(session['user'])
-
     if session.get('user'):
         return redirect(url_for('sensors'))   
     
@@ -126,6 +123,8 @@ def signup():
                 'email': email,
                 'user_pwd1': password
             }  
+
+            database.collection('User_data').add(users)  # Add user data to Firestore
             
             # Store the email in session to indicate that email verification is pending
             session['email_verification_pending'] = email
@@ -137,7 +136,6 @@ def signup():
             print("Error:", str(e))  # Print the error message for debugging
             return "Cannot be verified due to an error: {}".format(str(e))
         
-    database.collection('User_data').add(users)  # Add user data to Firestore
     
     return render_template('Signup.html', message="SignUp successful!")
 
