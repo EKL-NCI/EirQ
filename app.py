@@ -158,6 +158,7 @@ def check_email_exists(email):
 
 @app.route('/Sensors')
 def sensors():
+    print("Data:", messages)
     return render_template('Sensors.html', data=messages)
 
 
