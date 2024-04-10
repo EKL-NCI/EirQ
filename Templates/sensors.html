@@ -8,16 +8,22 @@
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.11.min.js"></script>
     <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
 </head>
-
+ 
 <body class="sensor-page">
-
+ 
     <style>
         .sensor-page {
-            background-image: url("{{ url_for('static', filename='img/skybg.png') }}"); 
+            background-image: url("{{ url_for('static', filename='img/skybg.png') }}");
             background-position: center;
         }
+        /* Position the modal in the bottom right corner */
+        .modal-bottom-right {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
     </style>
-    
+   
     <nav class="navbar navbar-dark custom-bg-color" aria-label="label">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="true" aria-label="Toggle navigation">
@@ -37,19 +43,41 @@
             </div>
         </div>
     </nav>
-
-<div class="container custom-mt-5"> <!-- create gap on the top (margin-top) -->
-    <div class="row justify-content-center"><!-- align the content of the row in the center -->
-        <div class="col-md-6"><!-- width of the column for medium-sized devices -->
-            <div class="card"><!-- display content within rectangular containers -->
+ 
+<!-- Filters for Warning Level and Date Ranges -->
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <select class="form-select" id="warningLevel">
+                <option value="">Select Warning Level</option>
+                <option value="0">Good ECO2</option>
+                <option value="1">Bad ECO2</option>
+                <option value="2">Dangerous ECO2</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <select class="form-select" id="dateRange">
+                <option value="">Select Date Range</option>
+                <option value="Yesterday">Yesterday</option>
+                <option value="3daysAgo">3 or more days ago</option>
+                <option value="LastWeek">Last week</option>
+                <option value="LastMonth">Last month</option>
+            </select>
+        </div>
+    </div>
+</div>
+ 
+<div class="container custom-mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
                 <div class="card-body custom-color2">
                     <h5 class="card-title text-center mb-4 custom-color2 display-6 fw-normal">Sensor - Live</h5>
-                    <!-- Здесь мы используем информацию с сенсора вместо полей для заполнения -->
+ 
                     <div id="messages" class="main_container" style="background-color: transparent; text-align: center; overflow-y: auto; max-height: 400px;">
-                        <!-- Sensor data will be populated here -->
-                        {% for msg in data %}
-                            <div class="sensor-info">
-                                <p class="sensor-data">Timestamp: {{ msg.timestamp }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm {{ msg.warning_level }}</p>
+                        {% for msg in data[::-1] %}
+                            <div class="sensor-info" data-date="{{ msg.date }}" data-warning="{{ msg.warning_level }}">
+                                <p class="sensor-data">Date/Time: {{ msg.current_time1 }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>
                             </div>
                         {% endfor %}
                     </div>
@@ -58,11 +86,70 @@
         </div>
     </div>
 </div>
-
+ 
+<!-- Modal for Dangerous eCO2 Level -->
+<div class="modal modal-bottom-right" id="dangerousLevelModal" tabindex="-1" aria-labelledby="dangerousLevelModalLabel" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="dangerousLevelModalLabel">Dangerous eCO2 Level</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Warning: Dangerous eCO2 level detected!</p>
+            </div>
+        </div>
+    </div>
+</div>
+ 
 <br>
-<br> <!-- for spave-->
-<br>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<br> 
+ 
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> <!-- Include jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+ 
+<script>
+    $(document).ready(function () {
+        // Function to filter data based on selected options
+        function filterData() {
+            var warningLevel = $('#warningLevel').val();
+            var dateRange = $('#dateRange').val();
+            var currentDate = new Date();
+ 
+            $('.sensor-info').hide(); // Hide all sensor info initially
+ 
+            // Show sensor info based on selected filter options
+            $('.sensor-info').each(function () {
+                var date = new Date($(this).data('date'));
+                var warning = $(this).data('warning');
+ 
+                var diffDays = Math.floor((currentDate - date) / (1000 * 60 * 60 * 24)); // Calculate difference in days
+ 
+                if ((warningLevel === '' || warning == warningLevel) &&
+                    (dateRange === '' ||
+                        (dateRange === 'Yesterday' && diffDays === 1) ||
+                        (dateRange === '3daysAgo' && diffDays >= 3) ||
+                        (dateRange === 'LastWeek' && diffDays <= 7) ||
+                        (dateRange === 'LastMonth' && diffDays <= 30))) {
+                    $(this).show();
+                }
+            });
+ 
+            // Show modal if warning level is 1 or if no filter is selected
+            if (warningLevel === '1' || (warningLevel === '' && dateRange === '')) {
+                $('#dangerousLevelModal').modal('show');
+            } else {
+                $('#dangerousLevelModal').modal('hide');
+            }
+        }
+ 
+        // Call filterData function when filter dropdowns change
+        $('#warningLevel, #dateRange').change(filterData);
+ 
+        // Initial data filtering when page loads
+        filterData();
+    });
+</script>
+ 
 </body>
 </html>
