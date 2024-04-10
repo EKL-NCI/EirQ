@@ -8,6 +8,7 @@ import pyrebase
 from collections.abc import MutableMapping
 
 app = Flask(__name__)
+loggedInStatus = False
 
 # Firebase service account cred!
 cred = credentials.Certificate("credentials.json")
@@ -66,12 +67,12 @@ def index():
 
 @app.route('/Login', methods=['GET', 'POST'])
 def login():
+    global loggedInStatus
+
     error_message = None
 
-    #if session.get('user'):
-        #return 'Welcome {}'.format(session['user'])
-
     if session.get('user'):
+        loggedInStatus = True
         return redirect(url_for('sensors'))   
     
     if request.method == 'POST':
@@ -81,6 +82,7 @@ def login():
         try:
             user = auth.sign_in_with_email_and_password(email, password)
             session['user'] = email
+            loggedInStatus = True
             # Redirect to the sensors page upon successful login
             return redirect(url_for('sensors'))
         except Exception as e:
@@ -99,6 +101,11 @@ def login():
 
 @app.route('/Signup', methods=['GET', 'POST'])
 def signup():
+
+    if session.get('user'):
+        loggedInStatus = True
+        return redirect(url_for('sensors'))
+    
     if request.method == 'POST':
         pwd0 = request.form['user_pwd0']
         pwd1 = request.form['user_pwd1']
@@ -160,7 +167,7 @@ def verify_email():
 
 @app.route('/Chart')
 def charts():
-    return render_template('My_chart.html',data=messages) #changed from sensor to chart
+    return render_template('My_chart.html')
 
 @app.route('/Dashboard')
 def dashboard():
@@ -168,7 +175,10 @@ def dashboard():
 
 @app.route('/Logout')
 def logout():
+    global loggedInStatus
+
     session.pop('user')
+    loggedInStatus = False
     return redirect('/')
 
 # Will catch any 404 error
