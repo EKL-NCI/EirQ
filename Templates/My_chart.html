@@ -232,7 +232,7 @@
                     return; // Exit the function early
                 }
 
-                if (data.datasets[0].data.length >= 10) { //if the length is = to or greater than 10 
+                if (data.datasets[0].data.length >= 10) { //if the array length is = to or greater than 10 
                     data.labels.shift();// Delete old eco2
                     data.datasets[0].data.shift();// Delete old time
                 }
