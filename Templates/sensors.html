@@ -14,7 +14,7 @@
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
    
 
-    const firebaseConfig = { //Configuration to be able to retrieve from the database 
+    const firebaseConfig = { //Configuration to be able to retrieve from the Firesroew 
 
         apiKey: "AIzaSyCVDRhmU_ps8O0GNI9FjqmR6oh67ariS3s",
         authDomain: "eirq-solutions.firebaseapp.com",
@@ -24,26 +24,38 @@
         messagingSenderId: "931290153741",
         appId: "1:931290153741:web:d8edcb6428ff83a5352644",
         measurementId: "G-KRKNJRRQMY"
-        
+
     };
-  
+        //
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const docRef = doc(db, "Sensors", "qgAUiAbZQNU4JFX5o9Bp"); // Construct document reference
+        const docRef = doc(db, "Sensors", "qgAUiAbZQNU4JFX5o9Bp"); // Construct Document references
 
         async function fetchData() {
-            try {
-                const docSnap = await getDoc(docRef); // Fetch document
-                console.log(docSnap.data()); // Log document data
-            } catch (error) {
-                console.error("Error fetching document:", error);
-            }
+        try {
+            const docSnap = await getDoc(docRef); // Fetch from Firetsore
+            const data = docSnap.data(); // Retrieve document data
+            displayData(data); // Display retrieved sensor data
+        } catch (error) {
+            console.error("Error fetching document:", error);
         }
+    }
 
-        fetchData();
+    function displayData(data) {
+        // Display the retrieved data in the HTML element
+        const messagesContainer = document.getElementById("smessages");
+        messagesContainer.innerHTML = `
+            <p style="display: flex; flex-direction: column; align-items: center;">
+                SensorNo: ${data.SensorNo}, 
+                SerialNo: ${data.SerialNo}, 
+                ProductID: ${data.ProductID}, 
+                Serviced: ${data.Serviced}
+            </p>`;
+    }
 
+    const fetchDataBtn = document.getElementById("fetchDataBtn");
+    fetchDataBtn.addEventListener("click", fetchData); // Add click event listener to fetch data button
 </script>
-
 
 <body class="sensor-page">
  
@@ -106,6 +118,7 @@
 
 <div class="container custom-mt-5">
     <div class="row justify-content-center">
+        <!-- Sensor Live Container -->
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body custom-color2">
@@ -117,6 +130,17 @@
                                 <p class="sensor-data">Date/Time: {{ msg.current_time1 }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>
                             </div>
                         {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Sensor Info Container -->
+        <div class="col-md-6">
+            <div class="card custom-card-opacity">
+                <div class="card">
+                    <h5 class="card-title text-center mb-4 custom-color2 display-6 fw-normal">MySenor Info</h5>
+                    <div id="smessages" class="main_container" style="background-color: transparent; text-align: center; overflow-y: auto; max-height: 400px;">
+                        <button id="fetchDataBtn" class="btn btn-primary mt-3"> Check</button>     
                     </div>
                 </div>
             </div>
@@ -138,7 +162,6 @@
         </div>
     </div>
 </div>
- 
 <br>
 <br> 
  
