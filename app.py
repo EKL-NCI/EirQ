@@ -73,7 +73,7 @@ def login():
 
     if session.get('user'):
         loggedInStatus = True
-        return redirect(url_for('sensors'))   
+        return redirect(url_for('dashboard'))   
     
     if request.method == 'POST':
         email = request.form.get('email')
@@ -84,7 +84,7 @@ def login():
             session['user'] = email
             loggedInStatus = True
             # Redirect to the sensors page upon successful login
-            return redirect(url_for('sensors'))
+            return redirect(url_for('dashboard'))
         except Exception as e:
             error_message = "Failed Login: {}".format(str(e))
             print("Login failed for user:", email, "with error:", str(e))  # Log failed login attempt
@@ -104,7 +104,7 @@ def signup():
 
     if session.get('user'):
         loggedInStatus = True
-        return redirect(url_for('sensors'))
+        return redirect(url_for('dashboard'))
     
     if request.method == 'POST':
         pwd0 = request.form['user_pwd0']
