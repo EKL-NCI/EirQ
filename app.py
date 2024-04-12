@@ -12,7 +12,7 @@ loggedInStatus = False
 
 # Firebase service account cred!
 cred = credentials.Certificate("credentials.json")
-firebase_admin.initialize_app(cred, options={'databaseURL': 'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
+firebase_admin.initialize_app(cred, options={'databaseURL':'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
 
 # Secret key for the app
 app.config['SECRET_KEY'] = 'EirqSecretKey'
@@ -166,10 +166,6 @@ def sensors():
 def verify_email():
     return render_template('Verify_email.html')
 
-
-@app.route('/Chart')
-def charts():
-    return render_template('My_chart.html',data=messages)
 
 @app.route('/Dashboard')
 def dashboard():
