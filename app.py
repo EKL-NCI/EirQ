@@ -173,7 +173,7 @@ def charts():
 
 @app.route('/Dashboard')
 def dashboard():
-    return render_template('Dashboard.html')
+    return render_template('Dashboard.html',data=messages)
 
 @app.route('/Logout')
 def logout():
