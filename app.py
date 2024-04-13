@@ -172,6 +172,10 @@ def logout():
     session.pop('user')
     return redirect('/')
 
+@app.route('/orderSensor')
+def orderSensor():
+    return render_template('orderSensor.html')
+
 # Will catch any 404 error
 if __name__ == '__main__':
     subscribe_to_channel()  # Start listening for PubNub messages
