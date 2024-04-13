@@ -17,7 +17,25 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <h3 class="card-title text-center mb-4">Order a Sensor</h3>
-                        <form>
+                        <form action="orderSensor.html" method="post">
+                            <!--Quantity of Sensors-->
+                            <div class="mb-3">
+                                <label for="quantity" class="form-label">Quantity:</label>
+                                <div class="input-group">
+                                    <select class="form-select" id="quantity">
+                                        <option value="01">1</option>
+                                        <option value="02">2</option>
+                                        <option value="03">3</option>
+                                        <option value="04">4</option>
+                                        <option value="05">5</option>
+                                        <option value="06">6</option>
+                                        <option value="07">7</option>
+                                        <option value="08">8</option>
+                                        <option value="09">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
                             <!-- Forename -->
                             <div class="mb-3">
                                 <label for="forename" class="form-label">Forename:</label>
