@@ -136,6 +136,9 @@
                             <input type="text" id="city" placeholder="  Enter vehicle location" spellcheck="false">
                             <button><img src="{{url_for('static', filename='img/search.png')}}"></button>
                         </div>
+                        <div class = "error">
+                            <p>Invalid City Name</p>
+                        </div>
                         <div class="weather">
                             <img src="{{url_for('static', filename='img/weathericon.png')}}" class="weather-icon">
                             <h1 class="temp">17°C</h1>
@@ -161,33 +164,68 @@
         <br>
         <br>
     <script>
-        //API for forecast conatiner
+        //API configuration for forecast conatiner 
         const apiKey = "9f6862b7d8a2e1df7db314a6dd6f38e6";
         const apiURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
         const searchBox = document.querySelector(".search input");
         const searchBtn = document.querySelector(".search button");
+        const weatherIcon  = document.querySelector(".weather-icon");
 
-
+        //allows this function to run while others run
         async function checkWeather(city){//looking for city entry
-                const response = await fetch(apiURL + city + `&appid=${apiKey}`);
-                var wdata = await response.json();
+            const response = await fetch(apiURL + city + `&appid=${apiKey}`);
+            if(response.status == 404){
+                document.querySelector(".error").style.display = "block";
+                document.querySelector(".weather").style.display = "none";
+            }else{
+                    
+            
+              var wdata = await response.json();
 
-                console.log(wdata);
-
+            //Updates the values with the weather searched
             document.querySelector(".city").innerHTML = wdata.name;
             document.querySelector(".temp").innerHTML = Math.round(wdata.main.temp) + " °C";//round up the temp
             document.querySelector(".humidity").innerHTML = wdata.main.humidity + " %";
             document.querySelector(".Wind").innerHTML = wdata.wind.speed + " Km/h";
-        }
+       
+            //Changes weather icon depending on the weather
+            if(wdata.weather[0].main == "Clouds"){
+                weatherIcon.src= "{{url_for('static', filename='img/cloudy.png')}}";
 
+            }
+            else if(wdata.weather[0].main == "Clear"){
+                weatherIcon.src= "{{url_for('static', filename='img/clear.png')}}";
+            }
+            else if(wdata.weather[0].main == "Drizzle"){
+                weatherIcon.src= "{{url_for('static', filename='img/drizzle.png')}}";
+            }
+
+            else if(wdata.weather[0].main == "Rain"){
+                weatherIcon.src= "{{url_for('static', filename='img/rain.png')}}";
+            }
+            else if(wdata.weather[0].main == "Mist"){
+                weatherIcon.src= "{{url_for('static', filename='img/mist.png')}}";
+            }
+
+            document.querySelector(".weather").style.display = "block";
+            document.querySelector(".error").style.display = "none";
+        
+        }
+    }
+
+    
     searchBtn.addEventListener("click",()=>{
     checkWeather(searchBox.value); //event listener for searchBtn
     })
+
+
+
    
     </script>
 </body>  
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <footer>
+    <!-- Building the graph chart -->
     <script> 
             var data = {
                 labels: [0],

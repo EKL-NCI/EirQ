@@ -69,6 +69,8 @@ def login():
 
     error_message = None
 
+    verified_message = None
+
     if session.get('user'):
         return redirect(url_for('dashboard'))   
     
@@ -78,9 +80,15 @@ def login():
         
         try:
             user = auth.sign_in_with_email_and_password(email, password)
-            session['user'] = email
-            # Redirect to the sensors page upon successful login
-            return redirect(url_for('dashboard'))
+            
+            # Check if the email is verified
+            if not auth.get_account_info(user['idToken'])['users'][0]['emailVerified']:
+                verified_message = "Email not verified. Please verify your email to login."
+                auth.send_email_verification(user['idToken'])  # Resend verification email
+            else:
+                session['user'] = email
+                # Redirect to the sensors page upon successful login
+                return redirect(url_for('dashboard'))
         except Exception as e:
             error_message = "Failed Login: {}".format(str(e))
             print("Login failed for user:", email, "with error:", str(e))  # Log failed login attempt
@@ -92,7 +100,8 @@ def login():
             if "TOO_MANY_ATTEMPTS_TRY_LATER" in error_message:
                 error_message = "Too many failed login attempts. Please try again later or contact support."
     
-    return render_template('Login.html' , error_message=error_message)
+    return render_template('Login.html' , error_message=error_message, verified_message=verified_message)
+
 
 
 @app.route('/Signup', methods=['GET', 'POST'])
@@ -117,7 +126,7 @@ def signup():
         # Check if the email already exists
         user_exists = check_email_exists(email)
         if user_exists:
-            return render_template('Signup.html', error_message="Email already exists. Please login instead.")
+            return render_template('Signup.html', exist_message="Email already exists. Please login instead.")
         
         try:
             user = auth.create_user_with_email_and_password(email, password)
@@ -171,6 +180,14 @@ def dashboard():
 def logout():
     session.pop('user')
     return redirect('/')
+
+@app.route('/orderSensor')
+def orderSensor():
+    return render_template('orderSensor.html')
+
+@app.route('/orderSubmitted')
+def orderSubmitted():
+    return render_template('orderSubmitted.html')
 
 # Will catch any 404 error
 if __name__ == '__main__':
