@@ -168,45 +168,45 @@
  
 <script>
     $(document).ready(function () {
-        // Function to filter data based on selected options
-        function filterData() {
-            var warningLevel = $('#warningLevel').val();
-            var dateRange = $('#dateRange').val();
-            var currentDate = new Date();
- 
-            $('.sensor-info').hide(); // Hide all sensor info initially
- 
-            // Show sensor info based on selected filter options
-            $('.sensor-info').each(function () {
-                var date = new Date($(this).data('date'));
-                var warning = $(this).data('warning');
- 
-                var diffDays = Math.floor((currentDate - date) / (1000 * 60 * 60 * 24)); // Calculate difference in days
- 
-                if ((warningLevel === '' || warning == warningLevel) &&
-                    (dateRange === '' ||
-                        (dateRange === 'Yesterday' && diffDays === 1) ||
-                        (dateRange === '3daysAgo' && diffDays >= 3) ||
-                        (dateRange === 'LastWeek' && diffDays <= 7) ||
-                        (dateRange === 'LastMonth' && diffDays <= 30))) {
-                    $(this).show();
-                }
-            });
- 
-            // Show modal if warning level is 1 or if no filter is selected
-            if (warningLevel === '1' || (warningLevel === '' && dateRange === '')) {
-                $('#dangerousLevelModal').modal('show');
-            } else {
-                $('#dangerousLevelModal').modal('hide');
+    // Function to filter data based on selected options
+    function filterData() {
+        var warningLevel = $('#warningLevel').val();
+        var dateRange = $('#dateRange').val();
+        var currentDate = new Date();
+
+        $('.sensor-info').hide(); // Hide all sensor info initially
+
+        // Show sensor info based on selected filter options
+        $('.sensor-info').each(function () {
+            var date = new Date($(this).data('date'));
+            var warning = $(this).data('warning');
+
+            var diffDays = Math.floor((currentDate - date) / (1000 * 60 * 60 * 24)); // Calculate difference in days
+
+            if ((warningLevel === '' || warning == warningLevel) &&
+                (dateRange === '' ||
+                    (dateRange === 'Yesterday' && diffDays === 1) ||
+                    (dateRange === '3daysAgo' && diffDays >= 3) ||
+                    (dateRange === 'LastWeek' && diffDays <= 7) ||
+                    (dateRange === 'LastMonth' && diffDays <= 30))) {
+                $(this).show();
             }
+        });
+
+        // Show modal only if warning level is 1 and no date range is selected
+        if (warningLevel === '1' && dateRange === '') {
+            $('#dangerousLevelModal').modal('show');
+        } else {
+            $('#dangerousLevelModal').modal('hide');
         }
- 
-        // Call filterData function when filter dropdowns change
-        $('#warningLevel, #dateRange').change(filterData);
- 
-        // Initial data filtering when page loads
-        filterData();
-    });
+    }
+
+    // Call filterData function when filter dropdowns change
+    $('#warningLevel, #dateRange').change(filterData);
+
+    // Initial data filtering when page loads
+    filterData();
+});
 </script>
  
 </body>
