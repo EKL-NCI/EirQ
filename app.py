@@ -176,12 +176,6 @@ def verify_email():
 def dashboard():
     return render_template('Dashboard.html',data=messages)
 
-
-@app.route('/Order')
-def orders():
-    return render_template('orderSensor.html')
-
-
 @app.route('/Logout')
 def logout():
     session.pop('user')
@@ -190,6 +184,10 @@ def logout():
 @app.route('/orderSensor')
 def orderSensor():
     return render_template('orderSensor.html')
+
+@app.route('/orderSubmitted')
+def orderSubmitted():
+    return render_template('orderSubmitted.html')
 
 # Will catch any 404 error
 if __name__ == '__main__':
