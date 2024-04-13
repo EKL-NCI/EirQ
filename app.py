@@ -176,6 +176,12 @@ def verify_email():
 def dashboard():
     return render_template('Dashboard.html',data=messages)
 
+
+@app.route('/Order')
+def orders():
+    return render_template('orderSensor.html')
+
+
 @app.route('/Logout')
 def logout():
     session.pop('user')
