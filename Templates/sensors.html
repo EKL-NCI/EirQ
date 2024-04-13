@@ -14,7 +14,7 @@
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
    
 
-    const firebaseConfig = { //Configuration to be able to retrieve from the Firesroew 
+    const firebaseConfig = { //Configuration to be able to retrieve from the Firestore 
 
         apiKey: "AIzaSyCVDRhmU_ps8O0GNI9FjqmR6oh67ariS3s",
         authDomain: "eirq-solutions.firebaseapp.com",
@@ -45,13 +45,15 @@
         // Display the retrieved data in the HTML element
         const messagesContainer = document.getElementById("smessages");
         messagesContainer.innerHTML = `
+        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
             <p style="display: flex; flex-direction: column; align-items: center;">
-                SensorNo: ${data.SensorNo}-
-                SerialNo: ${data.SerialNo}-
-                ProductID: ${data.ProductID}-
+                SensorNo: ${data.SensorNo} -
+                SerialNo: ${data.SerialNo} -
+                ProductID: ${data.ProductID} -
                 Serviced: ${data.Serviced}
-            </p>`;
-    }
+            </p>
+        </div>`;
+    };
 
     const fetchDataBtn = document.getElementById("fetchDataBtn");
     fetchDataBtn.addEventListener("click", fetchData); // Add click event listener to fetch data button
