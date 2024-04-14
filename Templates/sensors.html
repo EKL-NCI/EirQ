@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
 </head>
 <script type="module">
-    // Import the functions you need from the SDKs you need
+    // Import the functions you need from the SDKs you need - Morris js
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
     import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
@@ -59,6 +59,8 @@
 
     const fetchDataBtn = document.getElementById("fetchDataBtn");
     fetchDataBtn.addEventListener("click", fetchData); // Add click event listener to fetch data button
+
+    //end of morris js 
 </script>
 
 <body class="sensor-page">

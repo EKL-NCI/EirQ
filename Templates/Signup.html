@@ -75,14 +75,14 @@
         </div>
     </div>
 
-    {% if error_message %}
+    {% if error_message %} <!-- Display mesaage if triggered - Morris -->
     <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
         {{ error_message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endif %}
 
-    {% if exist_message %}
+    {% if exist_message %} <!-- Display mesaage if triggered - Morris -->
     <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
         {{ exist_message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -96,8 +96,8 @@
     <br>
 
     {% if exist_message %}
-    <script>
-        setTimeout(function() {   // If user gets error message they will be automaticallly moved to Login page in 5s
+    <script> //Morris Js 
+        setTimeout(function() {   // If user gets error message they will be automaticallly moved to Login page in 6s
             window.location.href = "/Login";
         }, 6000); // Redirect after 6 seconds (6000 milliseconds)
     </script>

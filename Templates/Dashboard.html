@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <script type="module">
-    // Import the functions you need from the SDKs you need
+    // Import the functions you need from the SDKs you need - Morris js
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
     import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
    
@@ -64,7 +64,7 @@
         // interval to fetch data and update chart every 3 seconds
         setInterval(fetchDataAndUpdateChart, 10000);
 
-    
+    //End of morris Js
     </script>
 
 <style>
@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6"><!--Weather App Container-->
                 <div class="card custom-card-opacity">
                     <div class="card">
                         <h5 class="card-title text-center mb-4 custom-color2 display-6 fw-normal">Forecast</h5>
@@ -164,6 +164,7 @@
         <br>
         <br>
     <script>
+        //Morris Js  - Weather App
         //API configuration for forecast conatiner 
         const apiKey = "9f6862b7d8a2e1df7db314a6dd6f38e6";
         const apiURL = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
@@ -219,13 +220,13 @@
     })
 
 
-
+    //End of weatherApp
    
     </script>
 </body>  
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <footer>
-    <!-- Building the graph chart -->
+    <!-- Realtime Graphe Morris JS -->
     <script> 
             var data = {
                 labels: [0],
@@ -280,8 +281,9 @@
                 data.datasets[0].data.push(value);//push the eCO2 to chart
                 airQualityChart.update(); //Update chart
         }
+        
     </script>
-
+    <!--End of chart -->
 </footer>
 
 </html>

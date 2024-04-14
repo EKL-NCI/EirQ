@@ -1,4 +1,4 @@
-#All code done by Erin and Morris, Morris set up Firebase and Helped with login and signup, Erin set up PubNub, the sensor code and routing
+#All code done by Erin and Morris, Morris done Realtime Firebase/FireStore and backend of login auth/sessions, signup  and email verifcation/ Erin set up PubNub, the sensor code and routing
 
 from flask import Flask, session, render_template, request,redirect, url_for
 from pubnub.pnconfiguration import PNConfiguration
@@ -28,7 +28,7 @@ messages = []
 # Firestore Client - Allow users to interact with firestore database
 database = firestore.client()
 
-# Firebase Confifuration
+# Firebase Confifuration access to firebase
 firebase_config = {   
 
             'apiKey': "AIzaSyCVDRhmU_ps8O0GNI9FjqmR6oh67ariS3s",
@@ -67,22 +67,22 @@ def index():
 
 @app.route('/Login', methods=['GET', 'POST'])
 def login():
-
+    #declare messages 
     error_message = None
 
     verified_message = None
 
-    if session.get('user'):
-        return redirect(url_for('dashboard'))   
+    if session.get('user'): #if the user is already logged in
+        return redirect(url_for('dashboard'))  #redirect 
     
-    if request.method == 'POST':
+    if request.method == 'POST': #Get email and password for autht
         email = request.form.get('email')
         password = request.form.get('password')
         
-        try:
+        try: #try sign in 
             user = auth.sign_in_with_email_and_password(email, password)
             
-            # Check if the email is verified
+            # Check if the email is verified resend new verification
             if not auth.get_account_info(user['idToken'])['users'][0]['emailVerified']:
                 verified_message = "Email not verified. Please verify your email to login."
                 auth.send_email_verification(user['idToken'])  # Resend verification email
@@ -97,7 +97,7 @@ def login():
             # Check if the error message contains "INVALID_LOGIN_CREDENTIALS"
             if "INVALID_LOGIN_CREDENTIALS" in error_message:
                 error_message = "Invalid email or password. Please try again."
-
+            # Check if the error message contains "TOO_MANY_ATTEMPTS_TRY_LATER"
             if "TOO_MANY_ATTEMPTS_TRY_LATER" in error_message:
                 error_message = "Too many failed login attempts. Please try again later or contact support."
     
@@ -107,16 +107,16 @@ def login():
 
 @app.route('/Signup', methods=['GET', 'POST'])
 def signup():
-
+    #if user is in session logged in
     if session.get('user'):
         loggedInStatus = True
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('dashboard')) # redirect
     
     if request.method == 'POST':
         pwd0 = request.form['user_pwd0']
         pwd1 = request.form['user_pwd1']
         
-        if pwd0 != pwd1:
+        if pwd0 != pwd1: #if password doesnt match
             return render_template('Signup.html', error_message="Invalid Email or Passwords do not match")
         
         businessName = request.form['business-name']
@@ -129,7 +129,7 @@ def signup():
         if user_exists:
             return render_template('Signup.html', exist_message="Email already exists. Please login instead.")
         
-        try:
+        try: #create user from enter details and send verification
             user = auth.create_user_with_email_and_password(email, password)
             auth.send_email_verification(user['idToken'])
 
@@ -180,12 +180,12 @@ def verify_email():
     return render_template('Verify_email.html')
 
 
-@app.route('/Dashboard')
+@app.route('/Dashboard') #Send live data from API to dashboard for Realtime data
 def dashboard():
     return render_template('Dashboard.html',data=messages)
 
 @app.route('/Logout')
-def logout():
+def logout(): #if use logs out redirect to home
     session.pop('user')
     return redirect('/')
 
@@ -200,5 +200,5 @@ def orderSubmitted():
 # Will catch any 404 error
 if __name__ == '__main__':
     subscribe_to_channel()  # Start listening for PubNub messages
-    app.run(debug=True, host='0.0.0.0', port=5001)
+    app.run(debug=True, host='0.0.0.0', port=5001) #Change port no: last digit if app dont run
 
