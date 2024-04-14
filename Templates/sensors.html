@@ -112,6 +112,9 @@
                 <option value="LastMonth">Last month</option>
             </select>
         </div>
+        <div class="col-md-6">
+            <button class="btn btn-primary" id="submitBtn">Submit</button>
+        </div>
     </div>
 </div>
 
@@ -209,8 +212,9 @@
         }
     }
 
-    // Call filterData function when filter dropdowns change
-    $('#warningLevel, #dateRange').change(filterData);
+    $('#submitBtn').click(function () {
+        filterData();
+    });
 
     // Initial data filtering when page loads
     filterData();
