@@ -11,7 +11,7 @@ from collections.abc import MutableMapping
 
 app = Flask(__name__)
 
-# Firebase service account cred! - Morris
+# Firebase service account cred!
 cred = credentials.Certificate("credentials.json")
 firebase_admin.initialize_app(cred, options={'databaseURL':'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
 

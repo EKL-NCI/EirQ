@@ -1,3 +1,4 @@
+# Erin's Code from raspberry pi
 import time
 from aq import AQ
 
@@ -107,3 +108,5 @@ except KeyboardInterrupt:
     print("\nLogging to file " + file_name + " complete")
     current_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     print("Logging ended at: " + current_time)
+
+# End of Erin's code from raspberry pi
