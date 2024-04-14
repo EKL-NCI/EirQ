@@ -1,3 +1,5 @@
+#All code done by Erin and Morris, Morris set up Firebase and Helped with login and signup, Erin set up PubNub, the sensor code and routing
+
 from flask import Flask, session, render_template, request,redirect, url_for
 from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub
@@ -9,7 +11,7 @@ from collections.abc import MutableMapping
 
 app = Flask(__name__)
 
-# Firebase service account cred!
+# Firebase service account cred! - Morris
 cred = credentials.Certificate("credentials.json")
 firebase_admin.initialize_app(cred, options={'databaseURL':'https://eirq-solutions-default-rtdb.europe-west1.firebasedatabase.app/'})
 
@@ -25,7 +27,6 @@ messages = []
 
 # Firestore Client - Allow users to interact with firestore database
 database = firestore.client()
-
 
 # Firebase Confifuration
 firebase_config = {   
