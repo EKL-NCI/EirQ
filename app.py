@@ -163,8 +163,15 @@ def check_email_exists(email):
 
 @app.route('/Sensors')
 def sensors():
-    print("Data:", messages)
-    return render_template('Sensors.html', data=messages)
+    #Retrieve from Realtime databasase 
+    data_ref = db.reference('air_quality')
+    data = data_ref.get() #Get function to retrieve from ref
+    if data:
+        sensor_data = list(data.values())  # Assuming each value represents a sensor reading
+        reversed_sensor_data = reversed(sensor_data)
+        return render_template('Sensors.html', data=reversed_sensor_data)
+    else:
+        return render_template('Sensors.html', data=None)
 
 
 @app.route('/Verify')

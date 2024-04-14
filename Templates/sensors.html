@@ -12,6 +12,7 @@
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
    
 
     const firebaseConfig = { //Configuration to be able to retrieve from the Firestore 
@@ -30,6 +31,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const docRef = doc(db, "Sensors", "qgAUiAbZQNU4JFX5o9Bp"); // Construct Document references
+    
 
         async function fetchData() {
         try {
@@ -129,7 +131,7 @@
                     <h5 class="card-title text-center mb-4 custom-color2 display-6 fw-normal">Sensor - Live</h5>
  
                     <div id="messages" class="main_container" style="background-color: transparent; text-align: center; overflow-y: auto; max-height: 400px;">
-                        {% for msg in data[::-1] %}
+                        {%for msg in data %}
                             <div class="sensor-info" data-date="{{ msg.date }}" data-warning="{{ msg.warning_level }}">
                                 <p class="sensor-data">Date/Time: {{ msg.current_time1 }}, Temperature: {{ msg.temperature }}°C, eCO2: {{ msg.eCO2 }} ppm</p>
                             </div>
