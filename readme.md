@@ -1,4 +1,10 @@
 # EirQ
+## About Us
+- EirQ aims to bring to the table an easy way for public transport systems and services to be able to track and monitor the air quality aboard their vehicles.​
+- The system utilizes an air quality sensor connected to a raspberry pi, making implementation costs quite cheap for clients.
+- EirQ makes use of a web application in order to display the live data collected from the sensor.
+- The application allows users to view the temperature in the area of the sensor, and also the carbon dioxide levels in the air in parts per million.
+
 
 ## How to Run
 
