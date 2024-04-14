@@ -167,7 +167,7 @@ def sensors():
     data_ref = db.reference('air_quality')
     data = data_ref.get() #Get function to retrieve from ref
     if data:
-        sensor_data = list(data.values())  # Assuming each value represents a sensor reading
+        sensor_data = list(data.values())  # each value represents a sensor reading
         reversed_sensor_data = reversed(sensor_data)
         return render_template('Sensors.html', data=reversed_sensor_data)
     else:
@@ -199,5 +199,5 @@ def orderSubmitted():
 # Will catch any 404 error
 if __name__ == '__main__':
     subscribe_to_channel()  # Start listening for PubNub messages
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
 
