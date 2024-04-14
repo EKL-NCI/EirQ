@@ -22,8 +22,12 @@
 .custom-bg-color {
     background: linear-gradient(135deg,#187de3,#ffffff) !important; /* !important to override default Bootstrap style */
 }
-
-
+/* order */
+.form-select{
+    border-radius: 20px; /* Rounding the corners of input fields */
+    background-color: rgba(255, 255, 255, 0.3); /* Transparent white color */
+    backdrop-filter: blur(2px); /*  blur to the input field */
+}
 
 
 /* Login */
