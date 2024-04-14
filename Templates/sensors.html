@@ -106,6 +106,7 @@
         <div class="col-md-4 mb-3">
             <select class="form-select" id="dateRange">
                 <option value="">Select Date Range</option>
+                <option value="ViewAll">View All</option>
                 <option value="Yesterday">Yesterday</option>
                 <option value="3daysAgo">3 or more days ago</option>
                 <option value="LastWeek">Last week</option>
@@ -196,6 +197,7 @@
 
             if ((warningLevel === '' || warning == warningLevel) &&
                 (dateRange === '' ||
+                    dateRange === 'ViewAll' ||
                     (dateRange === 'Yesterday' && diffDays === 1) ||
                     (dateRange === '3daysAgo' && diffDays >= 3) ||
                     (dateRange === 'LastWeek' && diffDays <= 7) ||
