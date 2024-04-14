@@ -3,60 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Order Sensor - EirQ Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/Styles.css')}}">
+    <title>Signup</title>
 </head>
 
 <style>
-    /* Additional CSS for centering the form and maintaining its shape */
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        max-height: 880px;
-        overflow-y: auto;
-        border-radius: 20px;
-        text-align: center;
-    }
-
-
-    .card {
-        width: 300%;
-        max-width: 500px; /* Adjust the maximum width as needed */
-    }
+.signup-page {
+    background-image: url("{{ url_for('static', filename='img/skybg.png') }}"); 
+    background-position: center;
+}
 </style>
 
-<body style="background-image: url('/static/img/skybg.png'); background-size: cover;">
-<br>
+<body class="signup-page">
 
-    <!-- Navbar -->
     <nav class="navbar navbar-dark custom-bg-color" aria-label="label">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="true" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand mx-auto" href="#">
-                <img src="{{url_for('static', filename='img/logoFull1.png')}}" alt="logo" width="180" class="rounded">
+                <img src="{{url_for('static', filename='img/logoFull1.png')}}" alt="logo" width="180"  class="rounded">
             </a>
-            <div class="navbar-collapse collapse" id="navbarsExample01">
-                <ul class="navbar-nav me-auto mb-2">
+            <div class="navbar-collapse collapse" id="navbarsExample01" style>
+                <ul class="navbar-nav me-auto mb2">
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="/Dashboard">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="/Logout">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href=/Login>Login</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container">
-        <div class="row justify-content-left-center">
-            <div class="col-md-8 col-lg-6">
-                <div class="card shadow">
-                    <div class="card-body" style="background: linear-gradient(135deg, #187de3, #ffffff);">
-                        <h3 class="card-title text-center mb-4">Order a Sensor</h3>
+    <div class="container custom-mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body custom-color2">
+                        <h5 class="card-title text-center mb-4 custom-color2 display-6 fw-normal">Order</h5>
+
                         <form action="/orderSubmitted">
-                            <!-- Quantity of Sensors -->
+                            <!--Quantity of Sensors-->
                             <div class="mb-3">
-                                <label for="quantity" class="form-label" style="font-size: 12px;">Quantity:</label>
+                                <label for="quantity" class="form-label">Quantity:</label>
                                 <div class="input-group">
                                     <select class="form-select" id="quantity">
                                         <option value="01">1</option>
@@ -74,91 +61,110 @@
                             </div>
                             <!-- Forename -->
                             <div class="mb-3">
-                                <label for="forename" class="form-label" style="font-size: 12px;">Forename:</label>
-                                <input type="text" class="form-control" id="forename" placeholder="Forename" required style="font-size: 12px;">
+                                <label for="forename" class="form-label">Forename:</label>
+                                <input type="text" class="form-control" id="forename" required>
                             </div>
                             <!-- Surname -->
                             <div class="mb-3">
-                                <label for="surname" class="form-label" style="font-size: 12px;">Surname:</label>
-                                <input type="text" class="form-control" id="surname" placeholder="Surname" required style="font-size: 12px;">
+                                <label for="surname" class="form-label">Surname:</label>
+                                <input type="text" class="form-control" id="surname" required>
                             </div>
                             <!-- Company Name -->
                             <div class="mb-3">
-                                <label for="company" class="form-label" style="font-size: 12px;">Company Name:</label>
-                                <input type="text" class="form-control" id="company" placeholder="Company Name" style="font-size: 12px;">
+                                <label for="company" class="form-label">Company Name:</label>
+                                <input type="text" class="form-control" id="company">
                             </div>
                             <!-- Address Line 1 -->
                             <div class="mb-3">
-                                <label for="address1" class="form-label" style="font-size: 12px;">Address Line 1:</label>
-                                <input type="text" class="form-control" id="address1" placeholder="Address Line 1" required style="font-size: 12px;">
+                                <label for="address1" class="form-label">Address Line 1:</label>
+                                <input type="text" class="form-control" id="address1" required>
                             </div>
                             <!-- Address Line 2 -->
                             <div class="mb-3">
-                                <label for="address2" class="form-label" style="font-size: 12px;">Address Line 2:</label>
-                                <input type="text" class="form-control" id="address2" placeholder="Address Line 2" style="font-size: 12px;">
+                                <label for="address2" class="form-label">Address Line 2:</label>
+                                <input type="text" class="form-control" id="address2">
                             </div>
                             <!-- Postcode -->
                             <div class="mb-3">
-                                <label for="postcode" class="form-label" style="font-size: 12px;">Postcode:</label>
-                                <input type="text" class="form-control" id="postcode" placeholder="Postcode" required style="font-size: 12px;">
+                                <label for="postcode" class="form-label">Postcode:</label>
+                                <input type="text" class="form-control" id="postcode" required>
                             </div>
-                            <!-- Card Owner Name and CVV Code -->
                             <div class="row mb-3">
+                                <!-- Card Owner Name -->
                                 <div class="col-md-6">
-                                    <label for="owner" class="form-label" style="font-size: 12px;">Owner</label>
-                                    <input type="text" class="form-control" id="owner" placeholder="Card Owner Name" required style="font-size: 12px;">
+                                  <label for="owner" class="form-label">Owner</label>
+                                  <input type="text" class="form-control" id="owner" placeholder="Card Owner Name" required>
                                 </div>
+                                <!-- CVV Code -->
                                 <div class="col-md-6">
-                                    <label for="cvv" class="form-label" style="font-size: 12px;">CVV</label>
-                                    <input type="text" class="form-control" id="cvv" placeholder="CVV" required style="font-size: 12px;">
+                                  <label for="cvv" class="form-label">CVV</label>
+                                  <input type="text" class="form-control" id="cvv" placeholder="CVV" required>
                                 </div>
-                            </div>
-                            <!-- Card Number -->
-                            <div class="mb-3">
-                                <label for="cardNumber" class="form-label" style="font-size: 12px;">Card Number</label>
-                                <input type="text" class="form-control" id="cardNumber" placeholder="Card Number" required style="font-size: 12px;">
-                            </div>
-                            <!-- Expiration Date -->
-                            <div class="row mb-3">
+                              </div>
+                              
+                              <div class="mb-3">
+                                <!-- Card Number -->
+                                <label for="cardNumber" class="form-label">Card Number</label>
+                                <input type="text" class="form-control" id="cardNumber" placeholder="Card Number" required>
+                              </div>
+                              
+                              <div class="row mb-3">
+                                <!-- Expiration Date -->
                                 <div class="col-md-6">
-                                    <label for="expirationDate" class="form-label" style="font-size: 12px;">Expiration Date</label>
-                                    <div class="input-group">
-                                        <select class="form-select" id="expirationMonth">
-                                            <!-- Month options -->
-                                            <option value="01">January</option>
-                                            <option value="02">February</option>
-                                            <option value="03">March</option>
-                                            <option value="04">April</option>
-                                            <option value="05">May</option>
-                                            <option value="06">June</option>
-                                            <option value="07">July</option>
-                                            <option value="08">August</option>
-                                            <option value="09">September</option>
-                                            <option value="10">October</option>
-                                            <option value="11">November</option>
-                                            <option value="12">December</option>
-                                        </select>
-                                    </div>
+                                  <label for="expirationDate" class="form-label">Expiration Date</label>
+                                  <div class="input-group">
+                                    <select class="form-select" id="expirationMonth">
+                                      <!-- Month options -->
+                                        <option value="01">January</option>
+                                        <option value="02">February</option>
+                                        <option value="03">March</option>
+                                        <option value="04">April</option>
+                                        <option value="05">May</option>
+                                        <option value="06">June</option>
+                                        <option value="07">July</option>
+                                        <option value="08">August</option>
+                                        <option value="09">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                      </select>
+                                    </select>
+                                    <select class="form-select" id="expirationYear">
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                        <option value="2031">2031</option>
+                                        <option value="2032">2032</option>
+                                        <option value="2033">2033</option>
+                                    </select>
+                                  </div>
                                 </div>
+                                <!-- Card Type Logos -->
                                 <div class="col-md-6 d-flex justify-content-center align-items-center">
                                     <img src="static/img/visa.png" alt="Visa" class="img-fluid" style="max-width: 50px; max-height: 30px;">
                                     <img src="static/img/mastercard.png" alt="MasterCard" class="img-fluid" style="max-width: 50px; max-height: 30px;">
                                     <img src="static/img/AMEX.png" alt="AMEX" class="img-fluid" style="max-width: 50px; max-height: 30px;">
-                                </div>
-                            </div>
+                                  </div>
+                              </div>
                             <!-- Submit Button -->
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-success">Submit Order</button>
                             </div>
+                            
                         </form>
+               
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
+
 </html>
