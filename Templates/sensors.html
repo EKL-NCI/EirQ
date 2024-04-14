@@ -212,8 +212,18 @@
         }
     }
 
+    // Function to handle the submit button click
     $('#submitBtn').click(function () {
-        filterData();
+        var warningLevel = $('#warningLevel').val();
+        var dateRange = $('#dateRange').val();
+
+        // Check if both forms are filled
+        if (warningLevel !== '' && dateRange !== '') {
+            filterData(); // Call the filter function when submit button is clicked and both forms are filled
+        } else {
+            // Inform the user to fill both forms
+            alert('Please select values for both forms before submitting.');
+        }
     });
 
     // Initial data filtering when page loads
