@@ -185,7 +185,7 @@ def dashboard():
     return render_template('Dashboard.html',data=messages)
 
 @app.route('/Logout')
-def logout(): #if use logs out redirect to home
+def logout(): #if user logs out redirect to home
     session.pop('user')
     return redirect('/')
 
