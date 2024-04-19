@@ -7,7 +7,7 @@ from pubnub.callbacks import SubscribeCallback
 import firebase_admin
 from firebase_admin import credentials, db, auth ,firestore #Import from Firebase App
 import pyrebase
-from collections.abc import MutableMapping
+
 
 app = Flask(__name__)
 
@@ -72,6 +72,9 @@ def login():
 
     verified_message = None
 
+    too_many_attempts_message = None
+    
+
     if session.get('user'): #if the user is already logged in
         return redirect(url_for('dashboard'))  #redirect 
     
@@ -98,10 +101,10 @@ def login():
             if "INVALID_LOGIN_CREDENTIALS" in error_message:
                 error_message = "Invalid email or password. Please try again."
             # Check if the error message contains "TOO_MANY_ATTEMPTS_TRY_LATER"
-            if "TOO_MANY_ATTEMPTS_TRY_LATER" in error_message:
-                error_message = "Too many failed login attempts. Please try again later or contact support."
-    
-    return render_template('Login.html' , error_message=error_message, verified_message=verified_message)
+            elif "TOO_MANY_ATTEMPTS_TRY_LATER" in error_message:
+                too_many_attempts_message = "Too many failed login attempts. Please try again later or contact support."
+
+    return render_template('Login.html', error_message=error_message, verified_message=verified_message, too_many_attempts_message=too_many_attempts_message)
 
 
 
@@ -118,7 +121,7 @@ def signup():
         
         if pwd0 != pwd1: #if password doesnt match
             return render_template('Signup.html', error_message="Invalid Email or Passwords do not match")
-        
+       
         businessName = request.form['business-name']
         email = request.form['email']
         name = request.form['name']

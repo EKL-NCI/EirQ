@@ -64,14 +64,28 @@
         </div>
     </div>
 </div>
-{% if verified_message %} <!-- Display mesaage if triggered - Morris -->
+{% if error_message %}
+<div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
+    {{ error_message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+{% if verified_message %}
 <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
     {{ verified_message }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endif %}
+
+{% if too_many_attempts_message %}
+<div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
+    {{ too_many_attempts_message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-
 </body>
 </html>
