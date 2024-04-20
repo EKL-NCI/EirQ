@@ -92,20 +92,20 @@
                             <div class="row mb-3">
                                 <!-- Card Owner Name -->
                                 <div class="col-md-6">
-                                  <label for="owner" class="form-label">Owner</label>
-                                  <input type="text" class="form-control" id="owner" placeholder="Card Owner Name" required>
+                                  <label for="owner" class="form-label">Cardholder Name:</label>
+                                  <input type="text" class="form-control" id="owner" name="owner" pattern="[A-Za-z ]+" placeholder="Card Owner Name" required>
                                 </div>
                                 <!-- CVV Code -->
                                 <div class="col-md-6">
                                   <label for="cvv" class="form-label">CVV</label>
-                                  <input type="text" class="form-control" id="cvv" placeholder="CVV" required>
+                                  <input type="text" class="form-control" id="cvv" name="cvv" pattern="\d{3}" placeholder="CVV" required>
                                 </div>
                               </div>
                               
                               <div class="mb-3">
                                 <!-- Card Number -->
                                 <label for="cardNumber" class="form-label">Card Number</label>
-                                <input type="text" class="form-control" id="cardNumber" placeholder="Card Number" required>
+                                <input type="text" class="form-control" id="cardNumber" name="cardNumber" pattern="\d{16}" placeholder="Card Number" required>
                               </div>
                               
                               <div class="row mb-3">
